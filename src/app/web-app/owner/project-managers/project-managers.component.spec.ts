@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProjectManagersListComponent } from './project-managers-list.component';
+import { ProjectManagersComponent } from './project-managers.component';
 
 describe('ProjectManagersListComponent', () => {
-  let component: ProjectManagersListComponent;
-  let fixture: ComponentFixture<ProjectManagersListComponent>;
+  let component: ProjectManagersComponent;
+  let fixture: ComponentFixture<ProjectManagersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProjectManagersListComponent ]
+      declarations: [ ProjectManagersComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProjectManagersListComponent);
+    fixture = TestBed.createComponent(ProjectManagersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

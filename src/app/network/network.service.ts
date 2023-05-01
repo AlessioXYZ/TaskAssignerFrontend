@@ -18,8 +18,8 @@ export class NetworkService {
     return this.http.get<Type>(this._baseUrl + url);
   }
 
-  put(url: string, data: any) {
-    return this.http.put(this._baseUrl + url, data);
+  put<Type>(url: string, data: any) {
+    return this.http.put<Type>(this._baseUrl + url, data);
   }
 
   delete(url: string) {

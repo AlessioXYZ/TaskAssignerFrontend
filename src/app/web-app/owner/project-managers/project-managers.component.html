@@ -1,0 +1,35 @@
+<h1 class="text-center">Project Manager</h1>
+
+<div id="page">
+  <table mat-table [dataSource]="projectManagers">
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef> Nome</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.first_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef> Cognome</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.last_name}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+
+<button mat-fab id="add-button" (click)="openCreateDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+

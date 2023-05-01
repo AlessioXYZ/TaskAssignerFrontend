@@ -1,0 +1,83 @@
+app-employee-list,
+app-project-managers-list,
+app-projects {
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+app-employee-list #page,
+app-project-managers-list #page,
+app-projects #page {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+@media screen and (min-width: 900px) {
+  app-employee-list #page,
+  app-project-managers-list #page,
+  app-projects #page {
+    height: 800px;
+  }
+}
+@media screen and (min-width: 750px) and (max-width: 800px) {
+  app-employee-list #page,
+  app-project-managers-list #page,
+  app-projects #page {
+    height: 820px;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+  app-employee-list #page,
+  app-project-managers-list #page,
+  app-projects #page {
+    height: 975px;
+  }
+}
+app-employee-list #page .color-green,
+app-project-managers-list #page .color-green,
+app-projects #page .color-green {
+  color: green;
+}
+app-employee-list #page .color-orange,
+app-project-managers-list #page .color-orange,
+app-projects #page .color-orange {
+  color: orange;
+}
+app-employee-list #page .color-red,
+app-project-managers-list #page .color-red,
+app-projects #page .color-red {
+  color: red;
+}
+app-employee-list #add-button,
+app-project-managers-list #add-button,
+app-projects #add-button {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 50px;
+}
+app-employee-list ::-webkit-scrollbar,
+app-project-managers-list ::-webkit-scrollbar,
+app-projects ::-webkit-scrollbar {
+  width: 10px;
+}
+app-employee-list ::-webkit-scrollbar-track,
+app-project-managers-list ::-webkit-scrollbar-track,
+app-projects ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+app-employee-list ::-webkit-scrollbar-thumb,
+app-project-managers-list ::-webkit-scrollbar-thumb,
+app-projects ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+app-employee-list ::-webkit-scrollbar-thumb:hover,
+app-project-managers-list ::-webkit-scrollbar-thumb:hover,
+app-projects ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.full-width {
+  width: 100%;
+}
+/*# sourceMappingURL=shared-list-style.component.css.map */

@@ -17,24 +17,30 @@ export class TokenInterceptor implements HttpInterceptor {
 
     let token = localStorage.getItem('token');
 
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Token ${token}`
-      }
-    });
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Token ${token}`
+        }
+      });
 
-    return next.handle(request).pipe(tap({
-        next: () => {},
-        error: (err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status !== 401) {
-              return;
+      return next.handle(request).pipe(tap({
+          next: () => {
+          },
+          error: (err: any) => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status !== 401) {
+                return;
+              }
+              this._router.navigate(['auth']).then(r => {
+              });
             }
-            this._router.navigate(['auth']).then(r => {});
-          }
-        },
-      }),
-    );
+          },
+        }),
+      );
+    }
+
+    return next.handle(request);
   }
 
 

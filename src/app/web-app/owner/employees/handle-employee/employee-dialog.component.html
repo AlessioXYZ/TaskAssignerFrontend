@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Crea Project Manager</h2>
+<mat-dialog-content>
+  <form [formGroup]="employeeForm.form">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" id="first_name" formControlName="first_name" placeholder="Inserisci il nome">
+        </mat-form-field>
+        <app-form-errors [form]="employeeForm.form" field="first_name" verboseName="Nome"></app-form-errors>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label>Cognome</mat-label>
+          <input matInput type="text" id="last_name" formControlName="last_name" placeholder="Inserisci il cognome">
+        </mat-form-field>
+        <app-form-errors [form]="employeeForm.form" field="last_name" verboseName="Cognome"></app-form-errors>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" id="username" formControlName="username" placeholder="Inserisci l'username">
+        </mat-form-field>
+        <app-form-errors [form]="employeeForm.form" field="username" verboseName="Username"></app-form-errors>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" id="email" formControlName="email" placeholder="Inserisci l'email">
+        </mat-form-field>
+        <app-form-errors [form]="employeeForm.form" field="email" verboseName="Email"></app-form-errors>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <mat-form-field class="full-width">
+          <mat-label>Ruolo</mat-label>
+          <mat-select formControlName="role" placeholder="Seleziona il ruolo">
+            <mat-option *ngFor="let role of roles" [value]="role.id">{{role.role}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <app-form-errors [form]="employeeForm.form" field="role" verboseName="Ruolo"></app-form-errors>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="handleEmployee()">Crea</button>
+</mat-dialog-actions>

@@ -27,7 +27,7 @@ export class LoginForm {
     if (this.form.valid) {
       this._userService.login(this.username?.value, this.password?.value).subscribe({
         next: (user) => {
-          localStorage.setItem('token', user.auth_token);
+          localStorage.setItem('token', user.auth_token ?? "");
           localStorage.setItem('user', JSON.stringify(user));
 
           let route = "";

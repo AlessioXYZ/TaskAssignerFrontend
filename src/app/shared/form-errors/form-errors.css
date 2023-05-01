@@ -1,0 +1,10 @@
+#errors {
+  margin-top: -3%;
+}
+
+@media screen and (max-width: 600px) {
+  #errors {
+    margin-top: -5%;
+  }
+}
+
