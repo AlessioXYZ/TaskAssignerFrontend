@@ -1,14 +1,12 @@
 import {Injectable} from '@angular/core';
-import {NetworkService} from "../../network.service";
-import {ProjectManager} from "../../models/project_manager";
+import {ProjectManager} from "../models/project_manager";
+import {AbstractUserService} from "./abstract-user.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectManagerService {
-
-  constructor(private networkService: NetworkService) {
-  }
+export class ProjectManagerService extends AbstractUserService {
+  redirectUrl: string = '/web-app/project-manager';
 
   getProjectManagers() {
     return this.networkService.get<ProjectManager[]>('project/project_manager/');

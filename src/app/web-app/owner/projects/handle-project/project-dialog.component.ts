@@ -1,9 +1,9 @@
 import {Component, Directive, EventEmitter, Inject, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ProjectManager} from "../../../../network/models/project_manager";
-import {ProjectManagerService} from "../../../../network/services/project-manager-service/project-manager-service.service";
-import {EmployeeService} from "../../../../network/services/employee-service/employee-service.service";
-import {ProjectService} from "../../../../network/services/project-service/project.service";
+import {ProjectManagerService} from "../../../../network/services/project-manager-service.service";
+import {EmployeeService} from "../../../../network/services/employee-service.service";
+import {ProjectService} from "../../../../network/services/project.service";
 import {Project} from "../../../../network/models/project";
 import {ProjectForm} from "./project-form/project-form";
 import {Employee} from "../../../../network/models/employee";

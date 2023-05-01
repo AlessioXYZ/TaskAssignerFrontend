@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ProjectManager} from "../../../network/models/project_manager";
-import {ProjectManagerService} from "../../../network/services/project-manager-service/project-manager-service.service";
+import {ProjectManagerService} from "../../../network/services/project-manager-service.service";
 import {CreateProjectManagerDialogComponent} from "./create-project-manager-dialog/create-project-manager-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 

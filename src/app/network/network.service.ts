@@ -14,8 +14,8 @@ export class NetworkService {
     return this.http.post<Type>(this._baseUrl + url, data);
   }
 
-  get<Type>(url: string) {
-    return this.http.get<Type>(this._baseUrl + url);
+  get<Type>(url: string, params?: any) {
+    return this.http.get<Type>(this._baseUrl + url, {params: params});
   }
 
   put<Type>(url: string, data: any) {

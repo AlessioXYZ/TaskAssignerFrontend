@@ -15,7 +15,9 @@ export class CanActivateToken {
 
   canActivate(): Observable<boolean> {
     if (localStorage.getItem('token')) {
-      return this.networkService.get('check-token/').pipe(
+      let params = {"token": localStorage.getItem('token') || ""};
+
+      return this.networkService.get('check-token/', params).pipe(
         map((user) => {
           localStorage.setItem('user', JSON.stringify(user));
 

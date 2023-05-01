@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Employee} from "../../../network/models/employee";
-import {EmployeeService} from "../../../network/services/employee-service/employee-service.service";
+import {EmployeeService} from "../../../network/services/employee-service.service";
 import {Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CreateProjectDialogComponent} from "../projects/handle-project/create-project-dialog/create-project-dialog.component";
 import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/create-employee-dialog.component";
 
 @Component({
@@ -12,10 +11,7 @@ import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/cre
   styleUrls: ['./employees-component.less']
 })
 export class EmployeesComponent implements OnInit {
-  public width: number = 0;
-  public height: number = 0;
-
-  public displayedColumns: string[] = ['first_name', 'last_name', 'email', 'role', 'score'];
+  public displayedColumns: string[] = ['username', 'first_name', 'last_name', 'email', 'role', 'score'];
   public employees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService, private _router: Router, private dialog: MatDialog) {

@@ -11,10 +11,8 @@ export class SetFormControlBackendErrorsService {
   static setBackendErrors(form: FormGroup, errors: any[]) {
     for (const key in errors) {
       const formField = key.replace('_', '');
-      const camelCaseFormField = formField.charAt(0).toLowerCase() + formField.slice(1);
 
-
-      const formControl = form.get(camelCaseFormField);
+      const formControl = form.get(key);
       if (formControl) {
         formControl.setErrors({'backendErrors': errors[key]});
       }

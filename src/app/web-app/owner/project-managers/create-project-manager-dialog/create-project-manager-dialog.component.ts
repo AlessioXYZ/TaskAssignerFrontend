@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {ProjectManagerService} from "../../../../network/services/project-manager-service/project-manager-service.service";
+import {ProjectManagerService} from "../../../../network/services/project-manager-service.service";
 import {ProjectManager} from "../../../../network/models/project_manager";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateProjectManagerForm} from "./create-project-manager-form/create-project-manager-form";

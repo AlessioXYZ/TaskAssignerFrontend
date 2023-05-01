@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Project} from "../../../network/models/project";
-import {ProjectService} from "../../../network/services/project-service/project.service";
+import {ProjectService} from "../../../network/services/project.service";
 import {CreateProjectDialogComponent} from "./handle-project/create-project-dialog/create-project-dialog.component";
 import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/edit-project-dialog.component";
 

@@ -1,15 +1,17 @@
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
-import {UserService} from "../../../network/services/user-service/user-service.service";
+import {UserService} from "../../../network/services/user-service.service";
 import {Router} from "@angular/router";
 import {User} from "../../../network/models/user";
+import {UserFactoryService} from "../../../network/services/user-factory.service";
+import {UserTypes} from "../../../network/services/abstract-user.service";
 
 
 @Injectable()
 export class LoginForm {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private _userService: UserService, private _router: Router) {
+  constructor(private fb: FormBuilder, private _userService: UserService, private _router: Router, private userFactoryService: UserFactoryService) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -31,21 +33,17 @@ export class LoginForm {
           localStorage.setItem('token', user.auth_token ?? "");
           localStorage.setItem('user', JSON.stringify(user));
 
-          let route = "";
-          if(!user.has_changed_password) {
-            route = '/web-app/change-password/';
-          }
-          if(user.type === 'owner') {
-            route = '/web-app/owner/';
-          }
-          else if(user.type === 'project-manager') {
-            route = '/web-app/project-manager/';
-          }
-          else if(user.type === 'employee') {
-            route = '/web-app/employee/';
-          }
 
-          this._router.navigate([route]).then(r => {});
+          let userType = <UserTypes>user.type;
+          let userObj = this.userFactoryService.getUserByType(userType);
+
+
+          if(!user.has_changed_password) {
+            this._router.navigate(['web-app/change-password']).then(r => r);
+          }
+          else {
+            userObj?.redirect();
+          }
         },
         error: (error) => {
           this.form.setErrors({backendError: error.error});

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {NetworkService} from "../../network.service";
-import {Role} from "../../models/role";
+import {NetworkService} from "../network.service";
+import {Role} from "../models/role";
 
 @Injectable({
   providedIn: 'root'

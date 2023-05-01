@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Project} from "../../models/project";
-import {NetworkService} from "../../network.service";
+import {Project} from "../models/project";
+import {NetworkService} from "../network.service";
 
 @Injectable({
   providedIn: 'root'
