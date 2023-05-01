@@ -9,5 +9,6 @@ export interface User {
   email: string,
   type?: string,
   company?: Company,
-  auth_token?: string
+  auth_token?: string,
+  has_changed_password?: boolean
 }

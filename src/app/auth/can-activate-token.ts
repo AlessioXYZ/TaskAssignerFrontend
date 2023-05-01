@@ -22,17 +22,19 @@ export class CanActivateToken {
           return true;
         }),
         catchError((error) => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          if (error.status === 500 || error.status === 504) {
+            return of(true)
+          } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
 
-          this.redirectToAuth();
+            this.redirectToAuth();
 
-          return of(false);
+            return of(false);
+          }
         })
       );
     } else {
-      this._router.navigate(['/auth']).then(r => r);
-
       this.redirectToAuth();
 
       return of(false);

@@ -6,11 +6,11 @@ import {RouterModule} from "@angular/router";
 import {OwnerModule} from "./owner/owner.module";
 import {EmployeeModule} from "./employee/employee.module";
 import {ProjectManagerModule} from "./project-manager/project-manager.module";
-import {SharedListStyleComponent} from './shared-list-style/shared-list-style.component';
+import {ListStyleComponent} from "./shared/list-style/list-style.component";
 
 @NgModule({
   declarations: [
-    SharedListStyleComponent
+    ListStyleComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +21,7 @@ import {SharedListStyleComponent} from './shared-list-style/shared-list-style.co
     ProjectManagerModule,
   ],
   exports: [
-    SharedListStyleComponent
+    ListStyleComponent
   ],
 })
 export class WebAppModule {

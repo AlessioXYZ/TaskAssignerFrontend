@@ -2,6 +2,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {UserService} from "../../../network/services/user-service/user-service.service";
 import {Router} from "@angular/router";
+import {User} from "../../../network/models/user";
 
 
 @Injectable()
@@ -26,11 +27,14 @@ export class LoginForm {
   onSubmit() {
     if (this.form.valid) {
       this._userService.login(this.username?.value, this.password?.value).subscribe({
-        next: (user) => {
+        next: (user: User) => {
           localStorage.setItem('token', user.auth_token ?? "");
           localStorage.setItem('user', JSON.stringify(user));
 
           let route = "";
+          if(!user.has_changed_password) {
+            route = '/web-app/change-password/';
+          }
           if(user.type === 'owner') {
             route = '/web-app/owner/';
           }

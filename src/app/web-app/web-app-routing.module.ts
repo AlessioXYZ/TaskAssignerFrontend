@@ -1,7 +1,6 @@
 import {inject, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CanActivateToken} from "../auth/can-activate-token";
-import {CommonModule} from "@angular/common";
 
 const routes: Routes = [
   {
