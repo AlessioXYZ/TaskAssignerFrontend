@@ -26,7 +26,9 @@ export class  CreateProjectManagerDialogComponent {
 
 
   createProjectManager() {
-    if (this.createProjectManagerForm.form.invalid) {
+    if (!this.createProjectManagerForm.form.valid) {
+      this.createProjectManagerForm.form.markAllAsTouched();
+      this.createProjectManagerForm.form.setErrors({'backendErrors': null});
       return;
     }
 

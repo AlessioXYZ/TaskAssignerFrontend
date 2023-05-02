@@ -16,6 +16,7 @@ export class CreateProjectDialogComponent extends ProjectDialogComponent {
   handleProject(): void {
     if (!this.projectForm.form.valid) {
       this.projectForm.form.markAllAsTouched();
+      this.projectForm.form.setErrors({'backendErrors': null});
       return;
     }
 

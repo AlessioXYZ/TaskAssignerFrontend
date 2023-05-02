@@ -16,6 +16,9 @@ export class CreateEmployeeDialog extends EmployeeDialogComponent {
   handleEmployee(): void {
     if (!this.employeeForm.form.valid) {
       this.employeeForm.form.markAllAsTouched();
+
+      this.employeeForm.form.setErrors({'backendErrors': null});
+
       return;
     }
 

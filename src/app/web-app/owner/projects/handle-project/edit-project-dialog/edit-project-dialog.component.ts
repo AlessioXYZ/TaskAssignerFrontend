@@ -29,6 +29,12 @@ export class EditProjectDialogComponent extends ProjectDialogComponent {
   }
 
   override handleProject(): void {
+    if (!this.projectForm.form.valid) {
+      this.projectForm.form.markAllAsTouched();
+      this.projectForm.form.setErrors({'backendErrors': null});
+      return;
+    }
+
     this.projectService.updateProject(this.data.project.id, this.formToProject()).subscribe({
       next: (project: any) => {
         this.handledProject.emit(project);
