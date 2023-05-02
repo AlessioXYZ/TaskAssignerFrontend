@@ -19,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
     let userType = <UserTypes>user.type;
     let userObj = this.userFactoryService?.getUserByType(userType);
 
-    if (!user.has_changed_password && userObj) {
+    if (user.has_changed_password && userObj) {
       userObj.redirect();
     }
   }

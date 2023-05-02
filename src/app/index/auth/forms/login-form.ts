@@ -28,6 +28,9 @@ export class LoginForm {
 
   onSubmit() {
     if (this.form.valid) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
       this._userService.login(this.username?.value, this.password?.value).subscribe({
         next: (user: User) => {
           localStorage.setItem('token', user.auth_token ?? "");

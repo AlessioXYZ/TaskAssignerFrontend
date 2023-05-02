@@ -29,6 +29,9 @@
         <div *ngIf="loginForm.password?.getError('required') && loginForm.password?.touched" class="text-danger">
           La password è obbligatoria
         </div>
+        <div *ngIf="loginForm.form?.getError('backendError')" class="text-danger">
+          {{loginForm.form.getError('backendError').error}}
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Accedi</button>
     </form>

@@ -35,25 +35,39 @@ export class ChangePasswordForm {
 
   checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     let pass = group.get('new_password')?.value;
-    let confirmPass = group.get('confirm_new_password')?.value
+    let confirmPass = group.get('confirm_new_password');
 
-    return pass === confirmPass || !pass ? null : {notSame: "Le password non coincidono"}
+    console.log(pass, confirmPass?.value, confirmPass?.touched)
+    if (pass !== confirmPass?.value && confirmPass?.touched) {
+      group.get('new_password')?.setErrors(["Le password non coincidono"]);
+      return {notSame: true}
+    } else {
+      group.get('new_password')?.setErrors(null);
+      return null;
+    }
   }
 
   changePassword() {
-    return this.userService.changePassword(this.oldPassword?.value, this.newPassword?.value).subscribe({
-      next: (user: User) => {
-        localStorage.setItem('user', JSON.stringify(user));
+    if (this.form.valid) {
+      this.userService.changePassword(this.oldPassword?.value, this.newPassword?.value).subscribe({
+        next: (user: User) => {
+          localStorage.setItem('user', JSON.stringify(user));
 
-        let userType = <UserTypes>user.type;
-        let userObj = this.userFactoryService.getUserByType(userType);
-        userObj?.redirect();
-      },
-      error: (err) => {
-        console.log(err.error)
-        SetFormControlBackendErrorsService.setBackendErrors(this.form, err.error);
-      }
-    })
+          let userType = <UserTypes>user.type;
+          let userObj = this.userFactoryService.getUserByType(userType);
+          userObj?.redirect();
+        },
+        error: (err) => {
+          console.log(err.error)
+          SetFormControlBackendErrorsService.setBackendErrors(this.form, err.error);
+        }
+      })
+    } else {
+      this.form.markAllAsTouched();
+
+      this.form.setErrors({'backendErrors': null});
+    }
+
   }
 }
 
