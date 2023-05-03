@@ -8,6 +8,9 @@ import { ProjectComponent } from './project/project.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './task/task.component';
 import { ProjectManagerComponent } from './project-manager.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { ProjectManagerComponent } from './project-manager.component';
   ],
   imports: [
     CommonModule,
-    ProjectManagerRoutingModule
+    ProjectManagerRoutingModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class ProjectManagerModule { }

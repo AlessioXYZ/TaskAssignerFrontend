@@ -11,7 +11,7 @@ const routes: Routes = [
     providers: [CanActivateToken],
     children: [
       {path: 'employee', loadChildren: () => import('./employee/employee-routing.module').then(m => m.EmployeeRoutingModule)},
-      {path: 'project_manager', loadChildren: () => import('./project-manager/project-manager-routing.module').then(m => m.ProjectManagerRoutingModule)},
+      {path: 'project-manager', loadChildren: () => import('./project-manager/project-manager-routing.module').then(m => m.ProjectManagerRoutingModule)},
       {path: 'owner', loadChildren: () => import('./owner/owner-routing.module').then(m => m.OwnerRoutingModule)},
       {path: 'change-password', component: ChangePasswordComponent}
     ],

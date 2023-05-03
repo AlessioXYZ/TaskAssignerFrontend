@@ -4,7 +4,7 @@ import {ProjectManager} from "../../../../network/models/project_manager";
 import {ProjectManagerService} from "../../../../network/services/project-manager-service.service";
 import {EmployeeService} from "../../../../network/services/employee-service.service";
 import {ProjectService} from "../../../../network/services/project.service";
-import {Project} from "../../../../network/models/project";
+import {Project, ProjectInterface} from "../../../../network/models/project";
 import {ProjectForm} from "./project-form/project-form";
 import {Employee} from "../../../../network/models/employee";
 
@@ -14,7 +14,7 @@ export abstract class ProjectDialogComponent {
   employees: Employee[] = [];
 
   abstract handleButtonText: string;
-  @Output() handledProject = new EventEmitter<Project>();
+  @Output() handledProject = new EventEmitter<ProjectInterface>();
   @Output() error = new EventEmitter<any>();
 
   constructor(
@@ -23,7 +23,7 @@ export abstract class ProjectDialogComponent {
     protected projectManagerService: ProjectManagerService,
     protected employeeService: EmployeeService,
     protected projectService: ProjectService,
-    @Inject(MAT_DIALOG_DATA) public data: { project: Project }
+    @Inject(MAT_DIALOG_DATA) public data: { project: ProjectInterface }
   ) {
 
   }
@@ -56,7 +56,7 @@ export abstract class ProjectDialogComponent {
     })
   }
 
-  formToProject(): Project {
+  formToProject(): ProjectInterface {
     return {
       name: this.projectForm.name?.value,
       description: this.projectForm.description?.value,

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Project} from "../models/project";
+import {Project, ProjectInterface} from "../models/project";
 import {NetworkService} from "../network.service";
 
 @Injectable({
@@ -10,18 +10,22 @@ export class ProjectService {
   }
 
   getProjects() {
-    return this.networkService.get<Project[]>('project/');
+    return this.networkService.get<ProjectInterface[]>('project/');
   }
 
-  createProject(project: Project) {
-    return this.networkService.post<Project>('project/', project);
+  createProject(project: ProjectInterface) {
+    return this.networkService.post<ProjectInterface>('project/', project);
   }
 
-  updateProject(id: number | undefined, project: Project) {
-    return this.networkService.put<Project>(`project/${id}/`, project);
+  updateProject(id: number | undefined, project: ProjectInterface) {
+    return this.networkService.put<ProjectInterface>(`project/${id}/`, project);
   }
 
   deleteProject(id: number | undefined) {
     return this.networkService.delete(`project/${id}/`);
+  }
+
+  getProject(projectId: number) {
+    return this.networkService.get<ProjectInterface>(`project/${projectId}/`);
   }
 }

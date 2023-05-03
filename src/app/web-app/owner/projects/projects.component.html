@@ -7,11 +7,6 @@
       <td mat-cell *matCellDef="let project"> {{project.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef> Azienda</th>
-      <td mat-cell *matCellDef="let project"> {{project.company.name}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="project_manager">
       <th mat-header-cell *matHeaderCellDef> Project Manager</th>
       <td mat-cell *matCellDef="let project"> {{project.project_manager.first_name}} {{ project.project_manager.last_name}} </td>

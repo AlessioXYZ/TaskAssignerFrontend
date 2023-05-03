@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Project} from "../../../network/models/project";
+import {Project, ProjectInterface} from "../../../network/models/project";
 import {ProjectService} from "../../../network/services/project.service";
 import {CreateProjectDialogComponent} from "./handle-project/create-project-dialog/create-project-dialog.component";
 import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/edit-project-dialog.component";
@@ -11,15 +11,15 @@ import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/e
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  public displayedColumns: string[] = ['name', 'company', 'project_manager', 'employees', 'edit', 'delete'];
-  public projects: Project[] = [];
+  public displayedColumns: string[] = ['name', 'project_manager', 'employees', 'edit', 'delete'];
+  public projects: ProjectInterface[] = [];
 
   constructor(private projectService: ProjectService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.projectService.getProjects().subscribe({
-      next: (projects: Project[]) => {
+      next: (projects: ProjectInterface[]) => {
         this.projects = projects;
       },
       error: (error: any) => {
@@ -31,7 +31,7 @@ export class ProjectsComponent implements OnInit {
   openCreateDialog() {
     let dialog: MatDialogRef<CreateProjectDialogComponent> = this.dialog.open(CreateProjectDialogComponent, {width: '600px',});
 
-    dialog.componentInstance.handledProject.subscribe((project: Project) => {
+    dialog.componentInstance.handledProject.subscribe((project: ProjectInterface) => {
       this.projects = [...this.projects, project];
     });
 
@@ -40,11 +40,11 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  openEditDialog(project: Project) {
+  openEditDialog(project: ProjectInterface) {
     let dialog: MatDialogRef<EditProjectDialogComponent> = this.dialog.open(EditProjectDialogComponent, {width: '600px', data: {project}});
 
-    dialog.componentInstance.handledProject.subscribe((project: Project) => {
-      this.projects = this.projects.map((p: Project) => {
+    dialog.componentInstance.handledProject.subscribe((project: ProjectInterface) => {
+      this.projects = this.projects.map((p: ProjectInterface) => {
         if (p.id === project.id) {
           return project;
         }
@@ -57,10 +57,10 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  deleteProject(project: Project) {
+  deleteProject(project: ProjectInterface) {
     this.projectService.deleteProject(project.id).subscribe({
       next: () => {
-        this.projects = this.projects.filter((p: Project) => p.id !== project.id);
+        this.projects = this.projects.filter((p: ProjectInterface) => p.id !== project.id);
       },
       error: (error: any) => {
         console.log(error);
