@@ -1,7 +1,7 @@
 import {Company} from "./company";
 import {ProjectManager} from "./project_manager";
-import {Employee} from "./employee";
-import {Task} from "./task";
+import {Employee, EmployeeInterface} from "./employee";
+import {TaskInterface} from "./task";
 
 
 export interface ProjectInterface {
@@ -10,8 +10,8 @@ export interface ProjectInterface {
   description: string;
   company?: Company;
   project_manager: ProjectManager | number;
-  employees?: Employee[] | number[];
-  tasks?: Task[];
+  employees?: EmployeeInterface[];
+  tasks?: TaskInterface[];
   score?: number;
 }
 
@@ -21,8 +21,8 @@ export class Project implements ProjectInterface {
     public description: string,
     public project_manager: ProjectManager | number,
     public company?: Company,
-    public employees?: Employee[] | number[],
-    public tasks?: Task[],
+    public employees?: EmployeeInterface[],
+    public tasks?: TaskInterface[],
     public id?: number,
     public score?: number
   ) {
@@ -32,7 +32,7 @@ export class Project implements ProjectInterface {
     if (!this.tasks || this.tasks.length === 0) {
       return 0;
     } else {
-      return this.tasks.map((task: Task) => task.estimated_minutes).reduce((a, b) => a + b);
+      return this.tasks.map((task: TaskInterface) => task.estimated_minutes).reduce((a, b) => a + b);
     }
   }
 
@@ -40,7 +40,7 @@ export class Project implements ProjectInterface {
     if (!this.tasks || this.tasks.length === 0) {
       return 0;
     } else {
-      return this.tasks.map((task: Task) => task.real_minutes ?? 0).reduce((a, b) => a + b);
+      return this.tasks.map((task: TaskInterface) => task.real_minutes ?? 0).reduce((a, b) => a + b);
     }
   }
 
@@ -56,6 +56,10 @@ export class Project implements ProjectInterface {
     }
 
     return '';
+  }
+
+  getEmployeeTasks(employee: EmployeeInterface) {
+    return this.tasks?.filter((task: TaskInterface) => task.employee === employee.id);
   }
 
   static fromJSON(json: ProjectInterface): Project {

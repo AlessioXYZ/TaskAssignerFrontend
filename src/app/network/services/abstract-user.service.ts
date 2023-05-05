@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {NetworkService} from "../network.service";
-import {EmployeeService} from "./employee-service.service";
 
 export enum UserTypes {
   OWNER= "owner",
@@ -20,5 +19,9 @@ export abstract class AbstractUserService {
 
   redirect() {
     this._router.navigate([this.redirectUrl]).then(r => r);
+  }
+
+  saveDevice(token: string) {
+    return this.networkService.post('add-device/', {"token": token})
   }
 }

@@ -10,7 +10,7 @@ export class NetworkService {
   constructor(private http: HttpClient) {
   }
 
-  post<Type>(url: string, data: any) {
+  post<Type>(url: string, data?: any) {
     return this.http.post<Type>(this._baseUrl + url, data);
   }
 
@@ -26,8 +26,8 @@ export class NetworkService {
     return this.http.delete(this._baseUrl + url);
   }
 
-  patch(url: string, data: any) {
-    return this.http.patch(this._baseUrl + url, data);
+  patch<Type>(url: string, data?: any) {
+    return this.http.patch<Type>(this._baseUrl + url, data);
   }
 
   head(url: string) {

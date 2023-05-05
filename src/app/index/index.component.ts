@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MessagingService} from "../network/firebase/messaging.service";
 
 @Component({
   selector: 'app-index',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
+  constructor(private messagingService: MessagingService) {
+  }
 
+  ngOnInit() {
+    this.messagingService.requestPermission();
+  }
 }

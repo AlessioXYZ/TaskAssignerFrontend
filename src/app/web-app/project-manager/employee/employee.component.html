@@ -1,0 +1,40 @@
+<div class="d-flex mt-4 align-items-baseline">
+  <div class="d-inline">
+    <button mat-icon-button [routerLink]="fromUrl" id="back-icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="d-inline" style="margin-bottom: 30px">
+    <h1>{{employee?.first_name}} {{employee?.last_name}}</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <h2>Statistiche</h2>
+    <div>
+      <b>Task completati: </b> {{employee?.tasks?.completed?.length}}
+    </div>
+    <div>
+      <b>Task in corso: </b> {{employee?.tasks?.pending?.length}}
+    </div>
+    <div>
+      <b>Score: </b> {{employee?.score}}
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md">
+    <h2>Task Attivi ({{employee?.tasks?.pending?.length}})</h2>
+    <app-task-expansion-panel *ngFor="let task of employee?.tasks?.pending" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+  </div>
+  <div class="col-md">
+    <h2>Task completati di recente ({{employee?.tasks?.recentCompleted?.length}})</h2>
+    <app-task-expansion-panel *ngFor="let task of employee?.tasks?.recentCompleted" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+  </div>
+</div>
+
+
+
+

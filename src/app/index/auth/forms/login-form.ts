@@ -2,7 +2,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {UserService} from "../../../network/services/user-service.service";
 import {Router} from "@angular/router";
-import {User} from "../../../network/models/user";
+import {UserInterface} from "../../../network/models/user";
 import {UserFactoryService} from "../../../network/services/user-factory.service";
 import {UserTypes} from "../../../network/services/abstract-user.service";
 
@@ -32,7 +32,7 @@ export class LoginForm {
       localStorage.removeItem('user');
 
       this._userService.login(this.username?.value, this.password?.value).subscribe({
-        next: (user: User) => {
+        next: (user: UserInterface) => {
           localStorage.setItem('token', user.auth_token ?? "");
           localStorage.setItem('user', JSON.stringify(user));
 

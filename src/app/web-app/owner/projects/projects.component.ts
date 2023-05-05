@@ -8,7 +8,7 @@ import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/e
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'project_manager', 'employees', 'edit', 'delete'];

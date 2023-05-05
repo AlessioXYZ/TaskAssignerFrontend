@@ -1,1 +1,25 @@
-<p>tasks works!</p>
+<div class="row mt-4">
+  <div class="col-md" style="overflow-y: auto">
+    <h2>Task in tempo ({{tasks.onTime.length}})</h2>
+    <div class="task-list">
+     <app-task-expansion-panel *ngFor="let task of tasks.onTime" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+    </div>
+  </div>
+  <div class="col-md">
+    <h2>Task in ritardo ({{tasks.overdue.length}})</h2>
+    <div class="task-list">
+      <app-task-expansion-panel *ngFor="let task of tasks.overdue" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+    </div>
+  </div>
+  <div class="col-md">
+    <h2>Task completati di recente ({{tasks.recentCompleted.length}})</h2>
+    <div class="task-list">
+      <app-task-expansion-panel *ngFor="let task of tasks.recentCompleted" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+    </div>
+  </div>
+</div>
+
+<button mat-fab id="add-button" (click)="openCreateDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+

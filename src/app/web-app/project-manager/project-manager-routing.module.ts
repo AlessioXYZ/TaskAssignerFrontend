@@ -4,6 +4,7 @@ import {ProjectManagerComponent} from "./project-manager.component";
 import {ProjectsComponent} from "./projects/projects.component";
 import {TasksComponent} from "./tasks/tasks.component";
 import {ProjectComponent} from "./project/project.component";
+import {EmployeeComponent} from "./employee/employee.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path: 'projects', component: ProjectsComponent},
       {path: 'tasks', component: TasksComponent},
       {path: 'project/:id', component: ProjectComponent},
+      {path: 'employee/:id', component: EmployeeComponent},
     ]
   },
 ];

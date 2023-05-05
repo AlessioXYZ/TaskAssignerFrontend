@@ -1,4 +1,4 @@
-import {User} from "./user";
+import {UserInterface} from "./user";
 
-export interface ProjectManager extends User {
+export interface ProjectManager extends UserInterface {
 }

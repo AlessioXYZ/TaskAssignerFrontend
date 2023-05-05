@@ -1,1 +1,36 @@
-<p>project works!</p>
+<div class="d-flex mt-4 align-items-baseline">
+  <div class="d-inline">
+    <button mat-icon-button routerLink="../../projects" id="back-icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="d-inline" style="margin-bottom: 30px">
+    <h1>{{project.name}}</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <h2>Descrizione</h2>
+    {{project.description}}
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md">
+    <h2>Dipendenti ({{project.employees?.length}})</h2>
+    <ul class="employee">
+      <li *ngFor="let employee of project.employees">
+        {{employee.first_name}} {{employee.last_name}}
+        <button mat-icon-button [routerLink]="['../../employee/', employee.id]" [queryParams]="{from: router.url, project_id: project.id}" class="employee-arrow">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+

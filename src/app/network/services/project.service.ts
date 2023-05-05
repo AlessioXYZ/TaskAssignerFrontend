@@ -13,6 +13,10 @@ export class ProjectService {
     return this.networkService.get<ProjectInterface[]>('project/');
   }
 
+  getProject(projectId: number) {
+    return this.networkService.get<ProjectInterface>(`project/${projectId}/`);
+  }
+
   createProject(project: ProjectInterface) {
     return this.networkService.post<ProjectInterface>('project/', project);
   }
@@ -25,7 +29,5 @@ export class ProjectService {
     return this.networkService.delete(`project/${id}/`);
   }
 
-  getProject(projectId: number) {
-    return this.networkService.get<ProjectInterface>(`project/${projectId}/`);
-  }
+
 }

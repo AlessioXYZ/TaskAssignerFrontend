@@ -10,6 +10,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {WebAppModule} from "./web-app/web-app.module";
 import {TokenInterceptor} from "./network/interceptors/token-interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AngularFireModule} from "@angular/fire/compat";
+import {MessagingService} from "./network/firebase/messaging.service";
+import {environment} from "../environments/environment.development";
+import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
 
 @NgModule({
   declarations: [
@@ -29,9 +33,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule,
   ],
   providers: [
     {multi: true, provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor},
+    MessagingService
   ],
   bootstrap: [AppComponent],
 

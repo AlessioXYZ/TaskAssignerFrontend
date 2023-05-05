@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee} from "../../../network/models/employee";
+import {EmployeeInterface} from "../../../network/models/employee";
 import {EmployeeService} from "../../../network/services/employee-service.service";
 import {Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -12,14 +12,14 @@ import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/cre
 })
 export class EmployeesComponent implements OnInit {
   public displayedColumns: string[] = ['username', 'first_name', 'last_name', 'email', 'role', 'score'];
-  public employees: Employee[] = [];
+  public employees: EmployeeInterface[] = [];
 
   constructor(private employeeService: EmployeeService, private _router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe({
-      next: (employees: Employee[]) => {
+      next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },
     });
@@ -38,7 +38,7 @@ export class EmployeesComponent implements OnInit {
   addEmployee() {
     let dialog: MatDialogRef<CreateEmployeeDialog> = this.dialog.open(CreateEmployeeDialog, {width: '600px',});
 
-    dialog.componentInstance.handledEmployee.subscribe((project: Employee) => {
+    dialog.componentInstance.handledEmployee.subscribe((project: EmployeeInterface) => {
       this.employees = [...this.employees, project];
     });
 

@@ -1,0 +1,19 @@
+.task-list {
+  overflow-y: auto;
+}
+@media screen and (min-width: 900px) {
+  .task-list {
+    height: 800px;
+  }
+}
+@media screen and (min-width: 750px) and (max-width: 800px) {
+  .task-list {
+    height: 820px;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+  .task-list {
+    height: 975px;
+  }
+}
+/*# sourceMappingURL=tasks.component.css.map */

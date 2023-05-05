@@ -6,12 +6,12 @@ import {EmployeeService} from "../../../../network/services/employee-service.ser
 import {ProjectService} from "../../../../network/services/project.service";
 import {Project, ProjectInterface} from "../../../../network/models/project";
 import {ProjectForm} from "./project-form/project-form";
-import {Employee} from "../../../../network/models/employee";
+import {EmployeeInterface} from "../../../../network/models/employee";
 
 @Directive()
 export abstract class ProjectDialogComponent {
   projectManagers: ProjectManager[] = [];
-  employees: Employee[] = [];
+  employees: EmployeeInterface[] = [];
 
   abstract handleButtonText: string;
   @Output() handledProject = new EventEmitter<ProjectInterface>();
@@ -47,7 +47,7 @@ export abstract class ProjectDialogComponent {
 
   setEmployeesOptions() {
     this.employeeService.getEmployees().subscribe({
-      next: (employees: Employee[]) => {
+      next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },
       error: (error: any) => {

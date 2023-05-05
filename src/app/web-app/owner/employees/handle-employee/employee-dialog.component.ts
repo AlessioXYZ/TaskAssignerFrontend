@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Project} from "../../../../network/models/project";
 import {EmployeeForm} from "./employee-form/employee-form";
 import {EmployeeService} from "../../../../network/services/employee-service.service";
-import {Employee} from "../../../../network/models/employee";
+import {EmployeeInterface} from "../../../../network/models/employee";
 import {Role} from "../../../../network/models/role";
 import {RoleService} from "../../../../network/services/role.service";
 
@@ -19,7 +19,7 @@ export abstract class EmployeeDialogComponent implements OnInit {
 
   roles: Role[] = [];
 
-  @Output() handledEmployee = new EventEmitter<Employee>();
+  @Output() handledEmployee = new EventEmitter<EmployeeInterface>();
   @Output() error = new EventEmitter<any>();
 
   constructor(
@@ -27,7 +27,7 @@ export abstract class EmployeeDialogComponent implements OnInit {
     public employeeForm: EmployeeForm,
     protected employeeService: EmployeeService,
     protected roleService: RoleService,
-    @Inject(MAT_DIALOG_DATA) public data: { project: Employee }
+    @Inject(MAT_DIALOG_DATA) public data: { project: EmployeeInterface }
   ) {
 
   }
@@ -42,7 +42,7 @@ export abstract class EmployeeDialogComponent implements OnInit {
     });
   }
 
-  protected formToEmployee(): Employee {
+  protected formToEmployee(): EmployeeInterface {
     return {
       first_name: this.employeeForm.firstName?.value,
       last_name: this.employeeForm.lastName?.value,
