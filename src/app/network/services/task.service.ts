@@ -29,4 +29,8 @@ export class TaskService {
       completed_date: null
     });
   }
+
+  createTask(task: TaskInterface) {
+    return this.networkService.post<TaskInterface>('task/', task);
+  }
 }

@@ -12,9 +12,6 @@ export class MessagingService {
   constructor(private angularFireMessaging: AngularFireMessaging, private employeeService: EmployeeService) {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
-        console.log('new message received. ', payload);
-        employeeService.getEmployees();
-
         this.currentMessage.next(payload);
       }
     );

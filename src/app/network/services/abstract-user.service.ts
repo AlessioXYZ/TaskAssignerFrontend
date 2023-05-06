@@ -22,6 +22,6 @@ export abstract class AbstractUserService {
   }
 
   saveDevice(token: string) {
-    return this.networkService.post('add-device/', {"token": token})
+    return this.networkService.post('add-device/', {"registration_id": token, "type": "web"});
   }
 }

@@ -10,9 +10,15 @@ import {ProjectManagerComponent} from './project-manager.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {EmployeeComponent} from './employee/employee.component';
 import {SharedModule} from "../../shared/shared.module";
-import { EmployeesComponent } from './employees/employees.component';
+import { CreateTaskDialogComponent } from './tasks/create-task-dialog/create-task-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -22,8 +28,7 @@ import { EmployeesComponent } from './employees/employees.component';
     ProjectComponent,
     TasksComponent,
     ProjectManagerComponent,
-    EmployeeComponent,
-    EmployeesComponent,
+    CreateTaskDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +36,15 @@ import { EmployeesComponent } from './employees/employees.component';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
 })
 export class ProjectManagerModule {

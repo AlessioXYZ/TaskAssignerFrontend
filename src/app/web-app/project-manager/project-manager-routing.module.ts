@@ -4,7 +4,8 @@ import {ProjectManagerComponent} from "./project-manager.component";
 import {ProjectsComponent} from "./projects/projects.component";
 import {TasksComponent} from "./tasks/tasks.component";
 import {ProjectComponent} from "./project/project.component";
-import {EmployeeComponent} from "./employee/employee.component";
+import {EmployeeComponent} from "../../shared/employee/employee.component";
+import {EmployeesComponent} from "../../shared/employees/employees-component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'projects', pathMatch: 'full'},
       {path: 'projects', component: ProjectsComponent},
       {path: 'tasks', component: TasksComponent},
+      {path: 'employees', component: EmployeesComponent, data: {'employeeUrl': '../employee'}},
       {path: 'project/:id', component: ProjectComponent},
       {path: 'employee/:id', component: EmployeeComponent},
     ]

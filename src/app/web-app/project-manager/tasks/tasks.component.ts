@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {TaskService} from "../../../network/services/task.service";
 import {Task, TasksList} from "../../../network/models/task";
+import {MatDialog} from "@angular/material/dialog";
+import {CreateTaskDialogComponent} from "./create-task-dialog/create-task-dialog.component";
+import {ProjectManager} from "../../../network/models/project_manager";
 
 @Component({
   selector: 'app-tasks',
@@ -10,7 +13,7 @@ import {Task, TasksList} from "../../../network/models/task";
 export class TasksComponent {
   tasks!: TasksList;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -36,6 +39,13 @@ export class TasksComponent {
   }
 
   openCreateDialog() {
+    let dialog = this.dialog.open(CreateTaskDialogComponent, {
+      width: '600px',
+    });
 
+    dialog.componentInstance.savedTask.subscribe((task: Task) => {
+        this.tasks = new TasksList([...this.tasks, task]);
+      }
+    );
   }
 }

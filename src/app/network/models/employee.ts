@@ -26,5 +26,9 @@ export class Employee extends User implements EmployeeInterface {
   get fullName(): string {
     return `${this.first_name} ${this.last_name}`;
   }
+
+  static fromJsonList(jsonList: EmployeeInterface[]): Employee[] {
+    return jsonList.map((json) => new Employee(json));
+  }
 }
 

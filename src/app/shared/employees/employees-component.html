@@ -1,6 +1,6 @@
 <h1 class="text-center">Dipendenti</h1>
 
-  <div id="page">
+<div id="page">
   <table mat-table [dataSource]="employees">
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef> Username</th>
@@ -31,6 +31,16 @@
       <th mat-header-cell *matHeaderCellDef> Score</th>
       <td mat-cell *matCellDef="let employee"><span class="material-icons color-{{ scoreToColor(employee.score) }}">circle</span></td>
     </ng-container>
+
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let employee">
+        <button mat-icon-button [routerLink]="[redirectUrl, employee.id]" [queryParams]="{from: router.url}" [disabled]="redirectUrl==''" class="employee-arrow">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

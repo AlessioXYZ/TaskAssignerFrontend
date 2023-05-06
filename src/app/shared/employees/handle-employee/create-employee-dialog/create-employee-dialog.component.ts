@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {componentDecoratorPreset, EmployeeDialogComponent} from "../employee-dialog.component";
 import {EmployeeForm} from "../employee-form/employee-form";
-import {SetFormControlBackendErrorsService} from "../../../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {SetFormControlBackendErrorsService} from "../../../set-form-control-backend-errors/set-form-control-backend-errors.service";
 
 
 @Component({

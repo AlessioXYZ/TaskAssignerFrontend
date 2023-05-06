@@ -18,13 +18,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {CreateProjectDialogComponent} from './projects/handle-project/create-project-dialog/create-project-dialog.component';
 import {EditProjectDialogComponent} from './projects/handle-project/edit-project-dialog/edit-project-dialog.component';
 import {ProjectManagersComponent} from "./project-managers/project-managers.component";
-import {EmployeesComponent} from "./employees/employees-component";
 import {CreateProjectManagerDialogComponent} from "./project-managers/create-project-manager-dialog/create-project-manager-dialog.component";
-import {CreateEmployeeDialog} from "./employees/handle-employee/create-employee-dialog/create-employee-dialog.component";
+import {CreateEmployeeDialog} from "../../shared/employees/handle-employee/create-employee-dialog/create-employee-dialog.component";
 
 @NgModule({
   declarations: [
-    EmployeesComponent,
     ProjectManagersComponent,
     OwnerComponent,
     NavbarComponent,
@@ -47,7 +45,8 @@ import {CreateEmployeeDialog} from "./employees/handle-employee/create-employee-
     MatSnackBarModule,
     SharedModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ]
 })
 export class OwnerModule {

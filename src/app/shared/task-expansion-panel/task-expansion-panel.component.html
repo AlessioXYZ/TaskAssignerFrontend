@@ -19,6 +19,9 @@
       <div>
         <b>Progetto: </b> <span>{{task.project}}</span>
       </div>
+      <div>
+        <b>Assegnato a: </b> <span>{{task.employee}}</span>
+      </div>
     </div>
     <mat-action-row>
       <button mat-button color="warn" *ngIf="!task.completed" (click)="complete()">Concludi</button>

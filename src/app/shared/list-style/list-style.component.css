@@ -1,6 +1,7 @@
 app-employee-list,
 app-project-managers-list,
-app-projects {
+app-projects,
+app-tasks {
   /* width */
   /* Track */
   /* Handle */
@@ -8,7 +9,8 @@ app-projects {
 }
 app-employee-list #page,
 app-project-managers-list #page,
-app-projects #page {
+app-projects #page,
+app-tasks #page {
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -16,65 +18,76 @@ app-projects #page {
 @media screen and (min-width: 900px) {
   app-employee-list #page,
   app-project-managers-list #page,
-  app-projects #page {
+  app-projects #page,
+  app-tasks #page {
     height: 800px;
   }
 }
 @media screen and (min-width: 750px) and (max-width: 800px) {
   app-employee-list #page,
   app-project-managers-list #page,
-  app-projects #page {
+  app-projects #page,
+  app-tasks #page {
     height: 820px;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1000px) {
   app-employee-list #page,
   app-project-managers-list #page,
-  app-projects #page {
+  app-projects #page,
+  app-tasks #page {
     height: 975px;
   }
 }
 app-employee-list #page .color-green,
 app-project-managers-list #page .color-green,
-app-projects #page .color-green {
+app-projects #page .color-green,
+app-tasks #page .color-green {
   color: green;
 }
 app-employee-list #page .color-orange,
 app-project-managers-list #page .color-orange,
-app-projects #page .color-orange {
+app-projects #page .color-orange,
+app-tasks #page .color-orange {
   color: orange;
 }
 app-employee-list #page .color-red,
 app-project-managers-list #page .color-red,
-app-projects #page .color-red {
+app-projects #page .color-red,
+app-tasks #page .color-red {
   color: red;
 }
 app-employee-list #add-button,
 app-project-managers-list #add-button,
-app-projects #add-button {
+app-projects #add-button,
+app-tasks #add-button {
   position: fixed;
   right: 0;
   bottom: 0;
-  margin: 50px;
+  margin: 3%;
 }
 app-employee-list ::-webkit-scrollbar,
 app-project-managers-list ::-webkit-scrollbar,
-app-projects ::-webkit-scrollbar {
+app-projects ::-webkit-scrollbar,
+app-tasks ::-webkit-scrollbar {
   width: 10px;
 }
 app-employee-list ::-webkit-scrollbar-track,
 app-project-managers-list ::-webkit-scrollbar-track,
-app-projects ::-webkit-scrollbar-track {
+app-projects ::-webkit-scrollbar-track,
+app-tasks ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 app-employee-list ::-webkit-scrollbar-thumb,
 app-project-managers-list ::-webkit-scrollbar-thumb,
-app-projects ::-webkit-scrollbar-thumb {
+app-projects ::-webkit-scrollbar-thumb,
+app-tasks ::-webkit-scrollbar-thumb {
   background: #888;
 }
 app-employee-list ::-webkit-scrollbar-thumb:hover,
 app-project-managers-list ::-webkit-scrollbar-thumb:hover,
-app-projects ::-webkit-scrollbar-thumb:hover {
+app-projects ::-webkit-scrollbar-thumb:hover,
+app-tasks ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 .full-width {

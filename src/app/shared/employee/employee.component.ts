@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Employee, EmployeeInterface} from "../../../network/models/employee";
-import {EmployeeService} from "../../../network/services/employee-service.service";
+import {Employee, EmployeeInterface} from "../../network/models/employee";
+import {EmployeeService} from "../../network/services/employee-service.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
-import {Task, TasksList} from "../../../network/models/task";
-import {ProjectService} from "../../../network/services/project.service";
+import {Task, TasksList} from "../../network/models/task";
+import {ProjectService} from "../../network/services/project.service";
 import {combineLatest, EMPTY, forkJoin, Observable, Subject, takeUntil} from "rxjs";
-import {Project} from "../../../network/models/project";
+import {Project} from "../../network/models/project";
 
 @Component({
   selector: 'app-employee',

@@ -7,7 +7,7 @@ export interface TaskInterface {
   estimated_minutes: number;
   real_minutes?: number;
   project: string;
-  employee?: number;
+  employee?: string;
   completed?: boolean;
   completed_date?: Date,
   inserted_date?: Date,
@@ -21,7 +21,7 @@ export class Task implements TaskInterface {
   estimated_minutes: number;
   real_minutes?: number;
   project: string;
-  employee?: number;
+  employee?: string;
   completed?: boolean;
   completed_date?: Date
   inserted_date?: Date;

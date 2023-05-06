@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {EmployeeInterface} from "../../../network/models/employee";
-import {EmployeeService} from "../../../network/services/employee-service.service";
-import {Router} from "@angular/router";
+import {EmployeeInterface} from "../../network/models/employee";
+import {EmployeeService} from "../../network/services/employee-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/create-employee-dialog.component";
 
@@ -11,10 +11,11 @@ import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/cre
   styleUrls: ['./employees-component.less']
 })
 export class EmployeesComponent implements OnInit {
-  public displayedColumns: string[] = ['username', 'first_name', 'last_name', 'email', 'role', 'score'];
+  public displayedColumns: string[] = ['username', 'first_name', 'last_name', 'email', 'role', 'score', 'open'];
   public employees: EmployeeInterface[] = [];
+  public redirectUrl: string = '';
 
-  constructor(private employeeService: EmployeeService, private _router: Router, private dialog: MatDialog) {
+  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute, public router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -22,6 +23,10 @@ export class EmployeesComponent implements OnInit {
       next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },
+    });
+
+    this.activatedRoute.data.subscribe((data: any) => {
+      this.redirectUrl = data.employeeUrl;
     });
   }
 
