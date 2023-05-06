@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagingService} from "../network/firebase/messaging.service";
 import {AbstractUserService} from "../network/services/abstract-user.service";
+import {LoggerService} from "../shared/logger/logger.service";
 
 @Component({
   selector: 'app-web-app',
@@ -12,7 +13,7 @@ import {AbstractUserService} from "../network/services/abstract-user.service";
   styles: []
 })
 export class WebAppComponent implements OnInit {
-  constructor(private messaging: MessagingService, private abstractUserService: AbstractUserService) {
+  constructor(private messaging: MessagingService, private abstractUserService: AbstractUserService, private logger: LoggerService) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class WebAppComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log('Unable to get permission to notify.', err);
+        this.logger.log('Impossibile ottenere il token per le notifiche push');
       }
     });
   }

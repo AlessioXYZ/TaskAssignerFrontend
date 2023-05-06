@@ -4,6 +4,7 @@ import {EmployeeService} from "../../network/services/employee-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/create-employee-dialog.component";
+import {LoggerService} from "../logger/logger.service";
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +16,7 @@ export class EmployeesComponent implements OnInit {
   public employees: EmployeeInterface[] = [];
   public redirectUrl: string = '';
 
-  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute, public router: Router, private dialog: MatDialog) {
+  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute, public router: Router, private dialog: MatDialog, private logger: LoggerService) {
   }
 
   ngOnInit() {
@@ -23,6 +24,9 @@ export class EmployeesComponent implements OnInit {
       next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },
+      error: (err) => {
+        this.logger.log(err, err.status)
+      }
     });
 
     this.activatedRoute.data.subscribe((data: any) => {
@@ -48,7 +52,7 @@ export class EmployeesComponent implements OnInit {
     });
 
     dialog.componentInstance.error.subscribe((error: any) => {
-      console.log(error);
+      this.logger.log(error, "Errore generico", false);
     });
   }
 }

@@ -4,6 +4,7 @@ import {Project, ProjectInterface} from "../../../network/models/project";
 import {ProjectService} from "../../../network/services/project.service";
 import {CreateProjectDialogComponent} from "./handle-project/create-project-dialog/create-project-dialog.component";
 import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/edit-project-dialog.component";
+import {LoggerService} from "../../../shared/logger/logger.service";
 
 @Component({
   selector: 'app-projects',
@@ -14,7 +15,7 @@ export class ProjectsComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'project_manager', 'employees', 'edit', 'delete'];
   public projects: ProjectInterface[] = [];
 
-  constructor(private projectService: ProjectService, private dialog: MatDialog) {
+  constructor(private projectService: ProjectService, private dialog: MatDialog, private logger: LoggerService) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class ProjectsComponent implements OnInit {
         this.projects = projects;
       },
       error: (error: any) => {
-        console.log(error);
+        this.logger.log(error, error.status);
       }
     });
   }
@@ -36,7 +37,7 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialog.componentInstance.error.subscribe((error: any) => {
-      console.log(error);
+      this.logger.log(error, "Errore generico", false);
     });
   }
 
@@ -53,7 +54,7 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialog.componentInstance.error.subscribe((error: any) => {
-      console.log(error);
+      this.logger.log(error, "Errore generico", false);
     });
   }
 
@@ -63,7 +64,7 @@ export class ProjectsComponent implements OnInit {
         this.projects = this.projects.filter((p: ProjectInterface) => p.id !== project.id);
       },
       error: (error: any) => {
-        console.log(error);
+        this.logger.log(error, error.status);
       }
     });
   }

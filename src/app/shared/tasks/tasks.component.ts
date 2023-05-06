@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateTaskDialogComponent} from "./create-task-dialog/create-task-dialog.component";
 import {ProjectManager} from "../../network/models/project_manager";
 import {ActivatedRoute, Router} from "@angular/router";
+import {LoggerService} from "../logger/logger.service";
 
 @Component({
   selector: 'app-tasks',
@@ -15,7 +16,7 @@ export class TasksComponent {
   tasks!: TasksList;
   moduleType: string = '';
 
-  constructor(private taskService: TaskService, private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private taskService: TaskService, private dialog: MatDialog, private activatedRoute: ActivatedRoute, private logger: LoggerService) {
   }
 
 
@@ -25,7 +26,7 @@ export class TasksComponent {
         this.tasks = new TasksList(tasks);
       },
       error: (error) => {
-        console.log(error);
+        this.logger.log(error, error.status);
       }
     })
   }

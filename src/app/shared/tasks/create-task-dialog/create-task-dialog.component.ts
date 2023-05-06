@@ -4,12 +4,13 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateTaskForm} from "./create-task-form.service";
 import {ProjectService} from "../../../network/services/project.service";
-import {Project, ProjectInterface} from "../../../network/models/project";
+import {ProjectInterface} from "../../../network/models/project";
 import {TaskInterface} from "../../../network/models/task";
 import {TaskService} from "../../../network/services/task.service";
 import {SetFormControlBackendErrorsService} from "../../set-form-control-backend-errors/set-form-control-backend-errors.service";
 import {EmployeeService} from "../../../network/services/employee-service.service";
-import {Employee, EmployeeInterface} from "../../../network/models/employee";
+import {Employee} from "../../../network/models/employee";
+import {LoggerService} from "../../logger/logger.service";
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -29,7 +30,8 @@ export class CreateTaskDialogComponent implements OnInit {
     private projectService: ProjectService,
     private employeeService: EmployeeService,
     private taskService: TaskService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private logger: LoggerService
   ) {
   }
 
@@ -39,7 +41,7 @@ export class CreateTaskDialogComponent implements OnInit {
         this.projects = projects;
       },
       error: (err) => {
-        console.log(err);
+        this.logger.log(err, err.status);
       }
     })
   }
@@ -50,7 +52,7 @@ export class CreateTaskDialogComponent implements OnInit {
         this.employees = Employee.fromJsonList(employees);
       },
       error: (err) => {
-        console.log(err);
+        this.logger.log(err, err.status);
       }
     })
   }

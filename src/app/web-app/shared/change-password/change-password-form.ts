@@ -5,13 +5,14 @@ import {UserTypes} from "../../../network/services/abstract-user.service";
 import {UserFactoryService} from "../../../network/services/user-factory.service";
 import {UserInterface} from "../../../network/models/user";
 import {SetFormControlBackendErrorsService} from "../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {LoggerService} from "../../../shared/logger/logger.service";
 
 
 @Injectable()
 export class ChangePasswordForm {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private userFactoryService: UserFactoryService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private userFactoryService: UserFactoryService, private logger: LoggerService) {
     this.form = this.fb.group({
         old_password: ['', Validators.required],
         new_password: ['', Validators.required],
@@ -37,7 +38,6 @@ export class ChangePasswordForm {
     let pass = group.get('new_password')?.value;
     let confirmPass = group.get('confirm_new_password');
 
-    console.log(pass, confirmPass?.value, confirmPass?.touched)
     if (pass !== confirmPass?.value && confirmPass?.touched) {
       group.get('new_password')?.setErrors(["Le password non coincidono"]);
       return {notSame: true}
@@ -58,7 +58,7 @@ export class ChangePasswordForm {
           userObj?.redirect();
         },
         error: (err) => {
-          console.log(err.error)
+          this.logger.log(err.error)
           SetFormControlBackendErrorsService.setBackendErrors(this.form, err.error);
         }
       })

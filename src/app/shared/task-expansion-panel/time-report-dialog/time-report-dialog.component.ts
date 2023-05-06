@@ -6,6 +6,7 @@ import {TimeReportForm} from "./time-report-dialog-form";
 import {TimeTaskService} from "../../../network/services/time-task-service.service";
 import {TimeTaskInterface} from "../../../network/models/time-task";
 import {ProjectInterface} from "../../../network/models/project";
+import {LoggerService} from "../../logger/logger.service";
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -21,6 +22,7 @@ export class TimeReportDialogComponent {
     public timeReportForm: TimeReportForm,
     private snackBar: MatSnackBar,
     private timeTaskService: TimeTaskService,
+    private logger: LoggerService,
     @Inject(MAT_DIALOG_DATA) public data: { task: TaskInterface }
   ) {
   }
@@ -31,8 +33,6 @@ export class TimeReportDialogComponent {
       minutes: this.timeReportForm.minutes?.value,
       note: this.timeReportForm.note?.value,
     }
-
-    console.log(timeTask);
 
     if (this.timeReportForm.form.valid) {
       this.timeTaskService.createTimeTask(timeTask).subscribe({

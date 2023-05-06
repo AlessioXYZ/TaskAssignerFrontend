@@ -4,17 +4,19 @@ import {ProjectManager} from "../../../network/models/project_manager";
 import {ProjectManagerService} from "../../../network/services/project-manager-service.service";
 import {CreateProjectManagerDialogComponent} from "./create-project-manager-dialog/create-project-manager-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {LoggerService} from "../../../shared/logger/logger.service";
 
 @Component({
   selector: 'app-project-managers-list',
   templateUrl: './project-managers.component.html',
   styleUrls: ['./project-managers.component.less']
 })
-export class ProjectManagersComponent implements OnInit{
+export class ProjectManagersComponent implements OnInit {
   public displayedColumns: string[] = ['first_name', 'last_name', 'username', 'email'];
   public projectManagers: ProjectManager[] = [];
 
-  constructor(private employeeService: ProjectManagerService, private dialog: MatDialog) {
+  constructor(private employeeService: ProjectManagerService, private dialog: MatDialog, private logger: LoggerService
+  ) {
   }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class ProjectManagersComponent implements OnInit{
     );
 
     dialog.componentInstance.error.subscribe((error: any) => {
-      console.log(error);
+      this.logger.log(error, "Errore generico", false);
     });
   }
 }

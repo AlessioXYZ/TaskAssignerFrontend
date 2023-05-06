@@ -7,6 +7,7 @@ import {ProjectService} from "../../../../network/services/project.service";
 import {Project, ProjectInterface} from "../../../../network/models/project";
 import {ProjectForm} from "./project-form/project-form";
 import {EmployeeInterface} from "../../../../network/models/employee";
+import {LoggerService} from "../../../../shared/logger/logger.service";
 
 @Directive()
 export abstract class ProjectDialogComponent {
@@ -23,6 +24,7 @@ export abstract class ProjectDialogComponent {
     protected projectManagerService: ProjectManagerService,
     protected employeeService: EmployeeService,
     protected projectService: ProjectService,
+    protected logger: LoggerService,
     @Inject(MAT_DIALOG_DATA) public data: { project: ProjectInterface }
   ) {
 
@@ -40,7 +42,7 @@ export abstract class ProjectDialogComponent {
         this.projectManagers = projectManagers;
       },
       error: (error: any) => {
-        console.log(error);
+        this.logger.log(error, error.status);
       }
     })
   }
@@ -51,7 +53,7 @@ export abstract class ProjectDialogComponent {
         this.employees = employees;
       },
       error: (error: any) => {
-        console.log(error);
+        this.logger.log(error, error.status);
       }
     })
   }

@@ -29,7 +29,7 @@ export class CreateProjectDialogComponent extends ProjectDialogComponent {
       error: (error: any) => {
         this.error.emit(error);
 
-        console.log(error)
+        this.logger.log(error, error.status);
 
         SetFormControlBackendErrorsService.setBackendErrors(this.projectForm.form, error.error);
       }
