@@ -24,6 +24,7 @@
       </div>
     </div>
     <mat-action-row>
+      <button mat-button color="primary" *ngIf="isEmployee() && !task.completed" (click)="openTimeReportDialog()">Segna tempo</button>
       <button mat-button color="warn" *ngIf="!task.completed" (click)="complete()">Concludi</button>
       <button mat-button color="secondary" *ngIf="task.completed" (click)="reopen()">Riattiva</button>
     </mat-action-row>

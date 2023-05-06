@@ -7,11 +7,13 @@ import {AbstractSubmoduleWebAppComponent} from "../abstract-submodule-web-app-co
   template: `
 	  <app-list-style></app-list-style>
 
+	  <app-navbar></app-navbar>
+
 	  <router-outlet></router-outlet>
   `,
   styles: [
   ]
 })
 export class EmployeeComponent extends AbstractSubmoduleWebAppComponent {
-  rightUserType: UserTypes = UserTypes.OWNER;
+  rightUserType: UserTypes = UserTypes.EMPLOYEE;
 }

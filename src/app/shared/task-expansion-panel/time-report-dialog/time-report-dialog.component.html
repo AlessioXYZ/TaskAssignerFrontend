@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Crea Project Manager</h2>
+<mat-dialog-content>
+  <form [formGroup]="timeReportForm.form">
+    <div class="row mb-3">
+      <div class="col-md">
+        <mat-form-field class="full-width">
+          <mat-label>Minuti</mat-label>
+          <input matInput type="number" id="minutes" formControlName="minutes" placeholder="Inserisci i minuti">
+        </mat-form-field>
+        <app-form-errors [form]="timeReportForm.form" field="minutes" verboseName="Minuti"></app-form-errors>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md">
+        <mat-form-field class="full-width">
+          <mat-label>Note</mat-label>
+          <textarea matInput type="text" id="note" formControlName="note" placeholder="Inserisci la nota"></textarea>
+        </mat-form-field>
+        <app-form-errors [form]="timeReportForm.form" field="note" verboseName="Nota"></app-form-errors>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="reportTime()">Crea</button>
+</mat-dialog-actions>

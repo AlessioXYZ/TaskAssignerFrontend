@@ -12,6 +12,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {EmployeeComponent} from "./employee/employee.component";
 import {RouterLink} from "@angular/router";
 import {TasksComponent} from "./tasks/tasks.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDialogModule} from "@angular/material/dialog";
+import {TimeReportDialogComponent} from "./task-expansion-panel/time-report-dialog/time-report-dialog.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +25,8 @@ import {TasksComponent} from "./tasks/tasks.component";
     TaskExpansionPanelComponent,
     EmployeesComponent,
     EmployeeComponent,
-    TasksComponent
+    TasksComponent,
+    TimeReportDialogComponent
   ],
   exports: [
     FormErrorsComponent,
@@ -29,7 +34,7 @@ import {TasksComponent} from "./tasks/tasks.component";
     TaskExpansionPanelComponent,
     EmployeesComponent,
     EmployeeComponent,
-    TasksComponent
+    TasksComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +44,8 @@ import {TasksComponent} from "./tasks/tasks.component";
     MatTableModule,
     MatIconModule,
     RouterLink,
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule {

@@ -1,6 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../../network/models/task';
 import {TaskService} from "../../network/services/task.service";
+import {ActivatedRoute} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {TimeReportDialogComponent} from "./time-report-dialog/time-report-dialog.component";
 
 
 @Component({
@@ -8,12 +11,26 @@ import {TaskService} from "../../network/services/task.service";
   templateUrl: './task-expansion-panel.component.html',
   styleUrls: ['./task-expansion-panel.component.css']
 })
-export class TaskExpansionPanelComponent {
+export class TaskExpansionPanelComponent implements OnInit {
   @Input() task!: Task;
   @Output() onTaskModify = new EventEmitter<Task>();
 
-  constructor(private taskService: TaskService) {
+  moduleType: string = '';
 
+  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {
+
+  }
+
+  setModuleType() {
+    this.moduleType = this.activatedRoute.snapshot.data['moduleType'];
+  }
+
+  isEmployee() {
+    return this.moduleType === 'employee';
+  }
+
+  ngOnInit() {
+    this.setModuleType();
   }
 
   complete() {
@@ -36,6 +53,21 @@ export class TaskExpansionPanelComponent {
       },
       error: (error: any) => {
         console.error(error);
+      }
+    });
+  }
+
+  openTimeReportDialog() {
+    let dialog = this.dialog.open(TimeReportDialogComponent, {
+      width: '600px',
+      data: {
+        task: this.task
+      }
+    });
+
+    dialog.componentInstance.reportedTime.subscribe((timeTask) => {
+      if (this.task.real_minutes) {
+        this.task.real_minutes += timeTask.minutes;
       }
     });
   }

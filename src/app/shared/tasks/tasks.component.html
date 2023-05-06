@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<button mat-fab id="add-button" (click)="openCreateDialog()">
+<button mat-fab id="add-button" (click)="openCreateDialog()" *ngIf="moduleType!='employee'">
   <mat-icon>add</mat-icon>
 </button>
 

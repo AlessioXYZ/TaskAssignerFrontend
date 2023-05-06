@@ -4,6 +4,7 @@ import {Task, TasksList} from "../../network/models/task";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTaskDialogComponent} from "./create-task-dialog/create-task-dialog.component";
 import {ProjectManager} from "../../network/models/project_manager";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-tasks',
@@ -12,11 +13,13 @@ import {ProjectManager} from "../../network/models/project_manager";
 })
 export class TasksComponent {
   tasks!: TasksList;
+  moduleType: string = '';
 
-  constructor(private taskService: TaskService, private dialog: MatDialog) {
+  constructor(private taskService: TaskService, private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit() {
+
+  private fetchTasks() {
     this.taskService.getTasks().subscribe({
       next: (tasks) => {
         this.tasks = new TasksList(tasks);
@@ -25,6 +28,15 @@ export class TasksComponent {
         console.log(error);
       }
     })
+  }
+
+  setModuleType() {
+    this.moduleType = this.activatedRoute.snapshot.data['moduleType'];
+  }
+
+  ngOnInit() {
+    this.fetchTasks();
+    this.setModuleType();
   }
 
 

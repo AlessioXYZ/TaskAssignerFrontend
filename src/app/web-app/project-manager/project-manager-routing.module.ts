@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'projects', pathMatch: 'full'},
       {path: 'projects', component: ProjectsComponent},
-      {path: 'tasks', component: TasksComponent},
+      {path: 'tasks', component: TasksComponent, data: {moduleType: 'project_manager'}},
       {path: 'employees', component: EmployeesComponent, data: {'employeeUrl': '../employee'}},
       {path: 'project/:id', component: ProjectComponent},
       {path: 'employee/:id', component: EmployeeComponent},
