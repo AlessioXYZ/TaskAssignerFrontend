@@ -18,7 +18,7 @@ export abstract class AbstractUserService {
   }
 
   redirect() {
-    this._router.navigate([this.redirectUrl]).then(r => r);
+    return this._router.navigate([this.redirectUrl]);
   }
 
   saveDevice(token: string) {

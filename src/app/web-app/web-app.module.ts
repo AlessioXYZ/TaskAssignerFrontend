@@ -16,6 +16,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonModule} from "@angular/material/button";
 import {WebAppComponent} from './web-app.component';
 import {ProjectManagerModule} from "./project-manager/project-manager.module";
+import {EmployeeModule} from "./employee/employee.module";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {ProjectManagerModule} from "./project-manager/project-manager.module";
     MatExpansionModule,
     MatButtonModule,
     SharedModule,
+    EmployeeModule
   ],
 })
 export class WebAppModule {
