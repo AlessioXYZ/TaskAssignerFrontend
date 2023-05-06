@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TaskService} from "../../../network/services/task.service";
-import {Task, TasksList} from "../../../network/models/task";
+import {TaskService} from "../../network/services/task.service";
+import {Task, TasksList} from "../../network/models/task";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTaskDialogComponent} from "./create-task-dialog/create-task-dialog.component";
-import {ProjectManager} from "../../../network/models/project_manager";
+import {ProjectManager} from "../../network/models/project_manager";
 
 @Component({
   selector: 'app-tasks',

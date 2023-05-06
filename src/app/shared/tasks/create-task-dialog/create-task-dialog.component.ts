@@ -1,15 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ProjectManager} from "../../../../network/models/project_manager";
+import {ProjectManager} from "../../../network/models/project_manager";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateTaskForm} from "./create-task-form.service";
-import {ProjectService} from "../../../../network/services/project.service";
-import {Project, ProjectInterface} from "../../../../network/models/project";
-import {TaskInterface} from "../../../../network/models/task";
-import {TaskService} from "../../../../network/services/task.service";
-import {SetFormControlBackendErrorsService} from "../../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
-import {EmployeeService} from "../../../../network/services/employee-service.service";
-import {Employee, EmployeeInterface} from "../../../../network/models/employee";
+import {ProjectService} from "../../../network/services/project.service";
+import {Project, ProjectInterface} from "../../../network/models/project";
+import {TaskInterface} from "../../../network/models/task";
+import {TaskService} from "../../../network/services/task.service";
+import {SetFormControlBackendErrorsService} from "../../set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {EmployeeService} from "../../../network/services/employee-service.service";
+import {Employee, EmployeeInterface} from "../../../network/models/employee";
 
 @Component({
   selector: 'app-create-task-dialog',

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProjectManagerComponent} from "./project-manager.component";
 import {ProjectsComponent} from "./projects/projects.component";
-import {TasksComponent} from "./tasks/tasks.component";
+import {TasksComponent} from "../../shared/tasks/tasks.component";
 import {ProjectComponent} from "./project/project.component";
 import {EmployeeComponent} from "../../shared/employee/employee.component";
 import {EmployeesComponent} from "../../shared/employees/employees-component";

@@ -11,6 +11,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {EmployeeComponent} from "./employee/employee.component";
 import {RouterLink} from "@angular/router";
+import {TasksComponent} from "./tasks/tasks.component";
 
 
 @NgModule({
@@ -19,14 +20,16 @@ import {RouterLink} from "@angular/router";
     ListStyleComponent,
     TaskExpansionPanelComponent,
     EmployeesComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    TasksComponent
   ],
   exports: [
     FormErrorsComponent,
     ListStyleComponent,
     TaskExpansionPanelComponent,
     EmployeesComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    TasksComponent
   ],
   imports: [
     CommonModule,

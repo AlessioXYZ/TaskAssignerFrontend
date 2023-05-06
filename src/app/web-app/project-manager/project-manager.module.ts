@@ -5,13 +5,12 @@ import {ProjectManagerRoutingModule} from './project-manager-routing.module';
 import {NavbarComponent} from './navbar/navbar.component';
 import {ProjectsComponent} from './projects/projects.component';
 import {ProjectComponent} from './project/project.component';
-import {TasksComponent} from './tasks/tasks.component';
 import {ProjectManagerComponent} from './project-manager.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../../shared/shared.module";
-import { CreateTaskDialogComponent } from './tasks/create-task-dialog/create-task-dialog.component';
+import { CreateTaskDialogComponent } from '../../shared/tasks/create-task-dialog/create-task-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -26,7 +25,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     NavbarComponent,
     ProjectsComponent,
     ProjectComponent,
-    TasksComponent,
     ProjectManagerComponent,
     CreateTaskDialogComponent,
   ],
