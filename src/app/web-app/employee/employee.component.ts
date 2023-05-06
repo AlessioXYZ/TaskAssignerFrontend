@@ -13,5 +13,5 @@ import {AbstractSubmoduleWebAppComponent} from "../abstract-submodule-web-app-co
   ]
 })
 export class EmployeeComponent extends AbstractSubmoduleWebAppComponent {
-  rightUserType: UserTypes = UserTypes.EMPLOYEE;
+  rightUserType: UserTypes = UserTypes.OWNER;
 }
