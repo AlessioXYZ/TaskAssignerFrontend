@@ -38,6 +38,8 @@ export class TimeReportDialogComponent {
       this.timeTaskService.createTimeTask(timeTask).subscribe({
         next: (task) => {
           this.dialogRef.close();
+          this.timeReportForm.form.reset();
+          
           this.snackBar.open('Tempo segnato con successo', 'Close', {});
 
           this.reportedTime.emit(task);

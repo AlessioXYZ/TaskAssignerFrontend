@@ -66,7 +66,7 @@ export class TaskExpansionPanelComponent implements OnInit {
     });
 
     dialog.componentInstance.reportedTime.subscribe((timeTask) => {
-      if (this.task.real_minutes) {
+      if (this.task.real_minutes !== undefined) {
         this.task.real_minutes += timeTask.minutes;
       }
     });
