@@ -10,8 +10,6 @@ export class SetFormControlBackendErrorsService {
 
   static setBackendErrors(form: FormGroup, errors: any[]) {
     for (const key in errors) {
-      const formField = key.replace('_', '');
-
       const formControl = form.get(key);
       if (formControl) {
         formControl.setErrors({'backendErrors': errors[key]});

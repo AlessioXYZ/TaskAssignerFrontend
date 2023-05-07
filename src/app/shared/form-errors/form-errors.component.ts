@@ -18,6 +18,7 @@ export class FormErrorsComponent {
   get errors() {
     if (this.isValidError()) {
       let errors = this.form?.get(this.field)?.errors;
+
       if (errors) {
         return Object.keys(errors).map(key => {
           if (errors) {

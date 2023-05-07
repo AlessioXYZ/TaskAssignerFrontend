@@ -15,23 +15,18 @@
     <h2>Login</h2>
     <form [formGroup]="loginForm.form" (ngSubmit)="loginForm.onSubmit()">
       <div class="mb-3">
-        <label for="loginUsername" class="form-label">Nome utente</label>
-        <input type="text" class="form-control" id="loginUsername" formControlName="username"
-               placeholder="Inserisci il nome utente">
-        <div *ngIf="loginForm.username?.getError('required') && loginForm.username?.touched" class="text-danger">
-          Il nome utente è obbligatorio
-        </div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" id="loginUsername" formControlName="username" placeholder="Inserisci l'username">
+        </mat-form-field>
+        <app-form-errors [form]="loginForm.form" field="username" verboseName="Username"></app-form-errors>
       </div>
       <div class="mb-3">
-        <label for="loginPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="loginPassword" formControlName="password"
-               placeholder="Inserisci la password">
-        <div *ngIf="loginForm.password?.getError('required') && loginForm.password?.touched" class="text-danger">
-          La password è obbligatoria
-        </div>
-        <div *ngIf="loginForm.form?.getError('backendError')" class="text-danger">
-          {{loginForm.form.getError('backendError').error}}
-        </div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" id="loginPassword" formControlName="password" placeholder="Inserisci la password">
+        </mat-form-field>
+        <app-form-errors [form]="loginForm.form" field="password" verboseName="Password"></app-form-errors>
       </div>
       <button type="submit" class="btn btn-primary">Accedi</button>
     </form>
@@ -41,60 +36,55 @@
     <form [formGroup]="registrationForm.form" (ngSubmit)="registrationForm.onSubmit()">
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="registrationUsername" class="form-label">Nome utente</label>
-          <input type="text" class="form-control" id="registrationUsername" formControlName="username" placeholder="Inserisci il nome utente">
-          <div *ngIf="registrationForm.username?.getError('required') && registrationForm.username?.touched" class="text-danger">
-            L'username è obbligatorio
-          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nome utente</mat-label>
+            <input matInput type="text" id="registrationUsername" formControlName="username" placeholder="Inserisci il nome utente">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="username" verboseName="Nome utente"></app-form-errors>
         </div>
         <div class="col-md-6">
-          <label for="registrationEmail" class="form-label">Email</label>
-          <input type="email" class="form-control" id="registrationEmail" formControlName="email" placeholder="Inserisci il nome utente">
-          <div *ngIf="registrationForm.email?.getError('required') && registrationForm.email?.touched" class="text-danger">
-            L'email è obbligatoria
-          </div>
-          <div *ngIf="registrationForm.email?.getError('email') && registrationForm.email?.touched" class="text-danger">
-            L'email non è valida
-          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" id="registrationEmail" formControlName="email" placeholder="Inserisci l'email">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="email" verboseName="Email"></app-form-errors>
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="registrationPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="registrationPassword" formControlName="password" placeholder="Inserisci la password">
-          <div *ngIf="registrationForm.password?.getError('required') && registrationForm.password?.touched"
-               class="text-danger">La password è obbligatoria
-          </div>
-          <div *ngIf="registrationForm.password?.getError('minlength') && registrationForm.password?.touched" class="text-danger">
-            La password deve essere lunga almeno 8 caratteri
-          </div>
-          <div *ngIf="registrationForm.form.getError('notSame') && registrationForm.password?.touched" class="text-danger">
-            Le password non coincidono
-          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" id="registrationPassword" formControlName="password" placeholder="Inserisci la password">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="password" verboseName="Password"></app-form-errors>
+          <app-form-errors [form]="registrationForm.form" field="notSame" verboseName="Password"></app-form-errors>
         </div>
         <div class="col-md-6">
-          <label for="confirmPassword" class="form-label">Conferma password</label>
-          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
-                 placeholder="Conferma la password">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Conferma password</mat-label>
+            <input matInput type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Conferma la password">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="confirmPassword" verboseName="Conferma password"></app-form-errors>
         </div>
       </div>
       <div class="row mb-3" formGroupName="company">
         <div class="col-md-6">
-          <label for="companyName" class="form-label">Nome Azienda</label>
-          <input type="text" class="form-control" id="companyName" formControlName="name" placeholder="Inserisci il nome">
-          <div *ngIf="registrationForm.company?.get('name')?.getError('required') && registrationForm.company?.get('name')?.touched" class="text-danger">
-            Il nome è obbligatorio
-          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nome Azienda</mat-label>
+            <input matInput type="text" id="companyName" formControlName="name" placeholder="Inserisci il nome">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="company.name" verboseName="Nome Azienda"></app-form-errors>
         </div>
         <div class="col-md-6">
-          <label for="piva" class="form-label">Partita IVA</label>
-          <input type="email" class="form-control" id="piva" formControlName="vat" placeholder="Inserisci la partita IVA">
-          <div *ngIf="registrationForm.company?.get('vat')?.getError('required') && registrationForm.company?.get('vat')?.touched" class="text-danger">
-            La partita IVA è obbligatoria
-          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Partita IVA</mat-label>
+            <input matInput type="text" id="piva" formControlName="vat" placeholder="Inserisci la partita IVA">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="company.vat" verboseName="Partita IVA"></app-form-errors>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Registrati</button>
     </form>
   </div>
 </div>
+

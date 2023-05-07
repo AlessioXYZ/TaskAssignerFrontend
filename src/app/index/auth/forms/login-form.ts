@@ -5,13 +5,15 @@ import {Router} from "@angular/router";
 import {UserInterface} from "../../../network/models/user";
 import {UserFactoryService} from "../../../network/services/user-factory.service";
 import {UserTypes} from "../../../network/services/abstract-user.service";
+import {SetFormControlBackendErrorsService} from "../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {LoggerService} from "../../../shared/logger/logger.service";
 
 
 @Injectable()
 export class LoginForm {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private _userService: UserService, private _router: Router, private userFactoryService: UserFactoryService) {
+  constructor(private fb: FormBuilder, private _userService: UserService, private _router: Router, private userFactoryService: UserFactoryService, private logger: LoggerService) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -41,15 +43,16 @@ export class LoginForm {
           let userObj = this.userFactoryService.getUserByType(userType);
 
 
-          if(!user.has_changed_password) {
+          if (!user.has_changed_password) {
             this._router.navigate(['web-app/change-password']).then(r => r);
-          }
-          else {
+          } else {
             userObj?.redirect();
           }
         },
         error: (error) => {
-          this.form.setErrors({backendError: error.error});
+          this.logger.log(error.error, error.status);
+
+          SetFormControlBackendErrorsService.setBackendErrors(this.form, error.error);
         }
       });
     } else {
