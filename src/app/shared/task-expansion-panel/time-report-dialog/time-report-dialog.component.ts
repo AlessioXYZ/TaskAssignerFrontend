@@ -39,8 +39,8 @@ export class TimeReportDialogComponent {
         next: (task) => {
           this.dialogRef.close();
           this.timeReportForm.form.reset();
-          
-          this.snackBar.open('Tempo segnato con successo', 'Close', {});
+
+          this.snackBar.open('Tempo segnato con successo', 'Cancella', {});
 
           this.reportedTime.emit(task);
         },
