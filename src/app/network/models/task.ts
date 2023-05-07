@@ -50,11 +50,13 @@ export class Task implements TaskInterface {
 
 
 export class TasksList extends Array<Task> {
+  originalTasks: Task[] = [];
 
   constructor(tasks: Task[]) {
     super()
 
     if (tasks[Symbol.iterator]) {
+      this.originalTasks = tasks;
       this.push(...tasks);
     }
   }
@@ -81,6 +83,17 @@ export class TasksList extends Array<Task> {
 
   get overdue(): Task[] {
     return this.pending.filter(task => task.due_date && new Date(task.due_date).getTime() < new Date().getTime())
+  }
+
+  private clear() {
+    this.splice(0, this.length);
+  }
+
+  taskFilter(filter: (task: Task) => boolean) {
+    this.clear();
+    this.push(...this.originalTasks.filter(filter));
+
+    this.filter(filter);
   }
 
   static jsonToTaskList(tasks: TaskInterface[]): TasksList {

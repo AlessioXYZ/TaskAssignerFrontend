@@ -1,8 +1,29 @@
 <div class="row mt-4">
+  <div class="col-md-6">
+    <mat-form-field class="full-width">
+      <mat-label>Cerca task</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field class="full-width">
+      <mat-label>Seleziona progetti</mat-label>
+      <mat-select [(ngModel)]="selectedProjects" (ngModelChange)="filterTasks()" multiple>
+        <mat-option *ngFor="let project of projects" [value]="project">
+          {{project.name}}
+        </mat-option>
+      </mat-select>
+      <mat-icon matPrefix>filter</mat-icon>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row mt-4">
   <div class="col-md" style="overflow-y: auto">
     <h2>Task in tempo ({{tasks.onTime.length}})</h2>
     <div class="task-list">
-     <app-task-expansion-panel *ngFor="let task of tasks.onTime" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+      <app-task-expansion-panel *ngFor="let task of tasks.onTime" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
     </div>
   </div>
   <div class="col-md">

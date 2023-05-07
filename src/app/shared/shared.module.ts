@@ -15,7 +15,8 @@ import {TasksComponent} from "./tasks/tasks.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
 import {TimeReportDialogComponent} from "./task-expansion-panel/time-report-dialog/time-report-dialog.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -45,7 +46,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatIconModule,
     RouterLink,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule
   ]
 })
 export class SharedModule {
