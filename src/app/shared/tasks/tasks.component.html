@@ -10,6 +10,7 @@
     <mat-form-field class="full-width">
       <mat-label>Seleziona progetti</mat-label>
       <mat-select [(ngModel)]="selectedProjects" (ngModelChange)="filterTasks()" multiple>
+        <mat-option *ngIf="projects?.length === 0" [value]="null" disabled>Nessun progetto</mat-option>
         <mat-option *ngFor="let project of projects" [value]="project">
           {{project.name}}
         </mat-option>

@@ -24,6 +24,7 @@
         <mat-form-field class="full-width">
           <mat-label>Project Manager</mat-label>
           <mat-select formControlName="projectManager">
+            <mat-option *ngIf="projectManagers?.length === 0" [value]="null" disabled>Nessun project manager</mat-option>
             <mat-option *ngFor="let projectManager of projectManagers" [value]="projectManager.id">{{projectManager.first_name}} {{projectManager.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -35,6 +36,7 @@
         <mat-form-field class="full-width">
           <mat-label>Dipendenti</mat-label>
           <mat-select formControlName="employees" multiple>
+            <mat-option *ngIf="employees?.length === 0" [value]="null" disabled>Nessun dipendente</mat-option>
             <mat-option *ngFor="let employee of employees" [value]="employee.id">{{employee.first_name}} {{employee.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>

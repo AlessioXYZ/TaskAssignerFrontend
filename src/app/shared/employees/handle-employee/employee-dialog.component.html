@@ -38,6 +38,7 @@
         <mat-form-field class="full-width">
           <mat-label>Ruolo</mat-label>
           <mat-select formControlName="role" placeholder="Seleziona il ruolo">
+            <mat-option *ngIf="roles?.length === 0" [value]="null" disabled>Nessun ruoolo</mat-option>
             <mat-option *ngFor="let role of roles" [value]="role.id">{{role.role}}</mat-option>
           </mat-select>
         </mat-form-field>

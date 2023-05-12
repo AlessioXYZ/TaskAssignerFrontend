@@ -70,6 +70,7 @@ export class CreateTaskDialogComponent implements OnInit {
         next: (task) => {
           this.savedTask.emit(task);
 
+          this.createTaskForm.form.reset();
           this.snackBar.open("Task creato con successo", "Chiud", {});
           this.dialogRef.close();
         },

@@ -36,7 +36,6 @@ export class WebAppComponent implements OnInit {
   redirectIfNotPasswordChanged() {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    console.log("qui");
     if (!user.has_changed_password) {
       this.router.navigate(['/web-app/change-password']).then(r => r);
     }

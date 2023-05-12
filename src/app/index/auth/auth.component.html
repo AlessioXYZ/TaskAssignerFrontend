@@ -37,6 +37,22 @@
       <div class="row mb-3">
         <div class="col-md-6">
           <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" id="first_name" formControlName="first_name" placeholder="Inserisci il nome">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="first_name" verboseName="Nome"></app-form-errors>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Cognome</mat-label>
+            <input matInput type="email" id="last_name" formControlName="last_name" placeholder="Inserisci l'email">
+          </mat-form-field>
+          <app-form-errors [form]="registrationForm.form" field="last_name" verboseName="Cognome"></app-form-errors>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" class="full-width">
             <mat-label>Nome utente</mat-label>
             <input matInput type="text" id="registrationUsername" formControlName="username" placeholder="Inserisci il nome utente">
           </mat-form-field>
@@ -67,20 +83,20 @@
           <app-form-errors [form]="registrationForm.form" field="confirmPassword" verboseName="Conferma password"></app-form-errors>
         </div>
       </div>
-      <div class="row mb-3" formGroupName="company">
+      <div class="row mb-3">
         <div class="col-md-6">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Nome Azienda</mat-label>
-            <input matInput type="text" id="companyName" formControlName="name" placeholder="Inserisci il nome">
+            <input matInput type="text" id="companyName" formControlName="company_name" placeholder="Inserisci il nome">
           </mat-form-field>
-          <app-form-errors [form]="registrationForm.form" field="company.name" verboseName="Nome Azienda"></app-form-errors>
+          <app-form-errors [form]="registrationForm.form" field="company_name" verboseName="Nome Azienda"></app-form-errors>
         </div>
         <div class="col-md-6">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Partita IVA</mat-label>
-            <input matInput type="text" id="piva" formControlName="vat" placeholder="Inserisci la partita IVA">
+            <input matInput type="text" id="company_vat_number" formControlName="company_vat_number" placeholder="Inserisci la partita IVA">
           </mat-form-field>
-          <app-form-errors [form]="registrationForm.form" field="company.vat" verboseName="Partita IVA"></app-form-errors>
+          <app-form-errors [form]="registrationForm.form" field="company_vat_number" verboseName="Partita IVA"></app-form-errors>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Registrati</button>
