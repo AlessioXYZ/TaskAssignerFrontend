@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MessagingService} from "../network/firebase/messaging.service";
 import {AbstractUserService} from "../network/services/abstract-user.service";
 import {LoggerService} from "../shared/logger/logger.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-web-app',
@@ -21,7 +22,9 @@ export class WebAppComponent implements OnInit {
   }
 
   fetchAndSaveDevice() {
-    this.messaging.requestPermission().subscribe({
+    this.messaging.requestPermission()
+      .pipe(first())
+      .subscribe({
       next: token => {
         if (token) {
           this.abstractUserService.saveDevice(token);
@@ -29,7 +32,7 @@ export class WebAppComponent implements OnInit {
       },
       error: (err) => {
         this.logger.log('Impossibile ottenere il token per le notifiche push');
-      }
+      },
     });
   }
 

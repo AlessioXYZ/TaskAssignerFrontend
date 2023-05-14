@@ -7,6 +7,7 @@ import {UserFactoryService} from "../../../network/services/user-factory.service
 import {UserTypes} from "../../../network/services/abstract-user.service";
 import {SetFormControlBackendErrorsService} from "../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
 import {LoggerService} from "../../../shared/logger/logger.service";
+import {first} from "rxjs";
 
 
 @Injectable()
@@ -33,7 +34,9 @@ export class LoginForm {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
 
-      this._userService.login(this.username?.value, this.password?.value).subscribe({
+      this._userService.login(this.username?.value, this.password?.value)
+        .pipe(first())
+        .subscribe({
         next: (user: UserInterface) => {
           localStorage.setItem('token', user.auth_token ?? "");
           localStorage.setItem('user', JSON.stringify(user));

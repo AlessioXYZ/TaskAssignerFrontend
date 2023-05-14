@@ -5,6 +5,7 @@ import {ProjectManagerService} from "../../../network/services/project-manager-s
 import {CreateProjectManagerDialogComponent} from "./create-project-manager-dialog/create-project-manager-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LoggerService} from "../../../shared/logger/logger.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-project-managers-list',
@@ -20,7 +21,9 @@ export class ProjectManagersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employeeService.getProjectManagers().subscribe({
+    this.employeeService.getProjectManagers()
+      .pipe(first())
+      .subscribe({
       next: (projectManagers: ProjectManager[]) => {
         this.projectManagers = projectManagers;
       },

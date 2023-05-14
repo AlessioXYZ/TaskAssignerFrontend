@@ -7,6 +7,7 @@ import {TimeTaskService} from "../../../network/services/time-task-service.servi
 import {TimeTaskInterface} from "../../../network/models/time-task";
 import {ProjectInterface} from "../../../network/models/project";
 import {LoggerService} from "../../logger/logger.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -35,7 +36,9 @@ export class TimeReportDialogComponent {
     }
 
     if (this.timeReportForm.form.valid) {
-      this.timeTaskService.createTimeTask(timeTask).subscribe({
+      this.timeTaskService.createTimeTask(timeTask)
+        .pipe(first())
+        .subscribe({
         next: (task) => {
           this.dialogRef.close();
           this.timeReportForm.form.reset();

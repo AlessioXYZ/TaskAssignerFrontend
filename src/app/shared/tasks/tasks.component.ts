@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoggerService} from "../logger/logger.service";
 import {ProjectService} from "../../network/services/project.service";
 import {ProjectInterface} from "../../network/models/project";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-tasks',
@@ -25,7 +26,9 @@ export class TasksComponent {
 
 
   private fetchTasks() {
-    this.taskService.getTasks().subscribe({
+    this.taskService.getTasks()
+      .pipe(first())
+      .subscribe({
       next: (tasks) => {
         this.tasks = new TasksList(tasks);
       },
@@ -36,7 +39,9 @@ export class TasksComponent {
   }
 
   private fetchProjects() {
-    this.projectService.getProjects().subscribe({
+    this.projectService.getProjects()
+      .pipe(first())
+      .subscribe({
       next: (projects) => {
         this.projects = projects;
       },

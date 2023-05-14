@@ -5,6 +5,7 @@ import {ProjectManager} from "../../../../network/models/project_manager";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateProjectManagerForm} from "./create-project-manager-form/create-project-manager-form";
 import {SetFormControlBackendErrorsService} from "../../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-create-project-manager-dialog',
@@ -37,7 +38,9 @@ export class  CreateProjectManagerDialogComponent {
       "first_name": this.createProjectManagerForm.firstName?.value,
       "last_name": this.createProjectManagerForm.lastName?.value,
       "email": this.createProjectManagerForm.email?.value,
-    }).subscribe({
+    })
+      .pipe(first())
+      .subscribe({
       next: (projectManager: ProjectManager) => {
         this.savedProjectManager.emit(projectManager);
         this.snackBar.open('Project Manager creato con successo!', 'OK', {duration: 5000});

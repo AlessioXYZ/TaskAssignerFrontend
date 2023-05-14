@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ProjectDialogComponent} from "../project-dialog.component";
 import {ProjectForm} from "../project-form/project-form";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-edit-project-dialog',
@@ -35,7 +36,9 @@ export class EditProjectDialogComponent extends ProjectDialogComponent {
       return;
     }
 
-    this.projectService.updateProject(this.data.project.id, this.formToProject()).subscribe({
+    this.projectService.updateProject(this.data.project.id, this.formToProject())
+      .pipe(first())
+      .subscribe({
       next: (project: any) => {
         this.handledProject.emit(project);
         this.dialogRef.close();

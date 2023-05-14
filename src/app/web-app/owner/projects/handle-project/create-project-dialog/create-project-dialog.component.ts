@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ProjectDialogComponent} from "../project-dialog.component";
 import {ProjectForm} from "../project-form/project-form";
 import {SetFormControlBackendErrorsService} from "../../../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {first} from "rxjs";
 
 
 @Component({
@@ -20,7 +21,9 @@ export class CreateProjectDialogComponent extends ProjectDialogComponent {
       return;
     }
 
-    this.projectService.createProject(this.formToProject()).subscribe({
+    this.projectService.createProject(this.formToProject())
+      .pipe(first())
+      .subscribe({
       next: (project: any) => {
         this.handledProject.emit(project);
 

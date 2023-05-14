@@ -8,6 +8,7 @@ import {UserTypes} from "../../../network/services/abstract-user.service";
 import {UserFactoryService} from "../../../network/services/user-factory.service";
 import {Router} from "@angular/router";
 import {SetFormControlBackendErrorsService} from "../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {first} from "rxjs";
 
 
 @Injectable()
@@ -91,7 +92,9 @@ export class RegistrationForm {
         vat_number: this.companyVat?.value,
       }
 
-      this.userService.register(user, company).subscribe({
+      this.userService.register(user, company)
+        .pipe(first())
+        .subscribe({
           next: (user) => {
             localStorage.setItem('token', user.auth_token ?? "");
             localStorage.setItem('user', JSON.stringify(user));

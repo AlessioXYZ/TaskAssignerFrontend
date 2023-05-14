@@ -4,7 +4,7 @@ import {EmployeeService} from "../../network/services/employee-service.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {Task, TasksList} from "../../network/models/task";
 import {ProjectService} from "../../network/services/project.service";
-import {combineLatest, EMPTY, forkJoin, Observable, Subject, takeUntil} from "rxjs";
+import {combineLatest, EMPTY, first, forkJoin, Observable, Subject, takeUntil} from "rxjs";
 import {Project} from "../../network/models/project";
 
 @Component({
@@ -37,7 +37,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
           let joinSources: Observable<any>[] = [this.employeeService.getEmployee(employeeId)];
           if (projectId != -1) joinSources.push(this.projectService.getProject(projectId));
 
-          forkJoin(joinSources).subscribe({
+          forkJoin(joinSources)
+            .pipe(first())
+            .subscribe({
             next: ([employee, project]) => {
               if (project) {
                 let projectObj = Project.fromJSON(project);

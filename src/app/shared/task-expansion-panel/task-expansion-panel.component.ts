@@ -4,6 +4,7 @@ import {TaskService} from "../../network/services/task.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {TimeReportDialogComponent} from "./time-report-dialog/time-report-dialog.component";
+import {first} from "rxjs";
 
 
 @Component({
@@ -34,7 +35,9 @@ export class TaskExpansionPanelComponent implements OnInit {
   }
 
   complete() {
-    this.taskService.complete(this.task).subscribe({
+    this.taskService.complete(this.task)
+      .pipe(first())
+      .subscribe({
       next: (task: Task) => {
         this.onTaskModify.emit(task);
         this.task = task;
@@ -46,7 +49,9 @@ export class TaskExpansionPanelComponent implements OnInit {
   }
 
   reopen() {
-    this.taskService.reopen(this.task).subscribe({
+    this.taskService.reopen(this.task)
+      .pipe(first())
+      .subscribe({
       next: (task: Task) => {
         this.onTaskModify.emit(task);
         this.task = task;

@@ -8,6 +8,7 @@ import {Project, ProjectInterface} from "../../../../network/models/project";
 import {ProjectForm} from "./project-form/project-form";
 import {EmployeeInterface} from "../../../../network/models/employee";
 import {LoggerService} from "../../../../shared/logger/logger.service";
+import {first} from "rxjs";
 
 @Directive()
 export abstract class ProjectDialogComponent {
@@ -37,7 +38,9 @@ export abstract class ProjectDialogComponent {
   }
 
   setProjectManagersOptions() {
-    this.projectManagerService.getProjectManagers().subscribe({
+    this.projectManagerService.getProjectManagers()
+      .pipe(first())
+      .subscribe({
       next: (projectManagers: ProjectManager[]) => {
         this.projectManagers = projectManagers;
       },
@@ -48,7 +51,9 @@ export abstract class ProjectDialogComponent {
   }
 
   setEmployeesOptions() {
-    this.employeeService.getEmployees().subscribe({
+    this.employeeService.getEmployees()
+      .pipe(first())
+      .subscribe({
       next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },

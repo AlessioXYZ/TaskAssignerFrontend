@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {componentDecoratorPreset, EmployeeDialogComponent} from "../employee-dialog.component";
 import {EmployeeForm} from "../employee-form/employee-form";
 import {SetFormControlBackendErrorsService} from "../../../set-form-control-backend-errors/set-form-control-backend-errors.service";
+import {first} from "rxjs";
 
 
 @Component({
@@ -22,7 +23,9 @@ export class CreateEmployeeDialog extends EmployeeDialogComponent {
       return;
     }
 
-    this.employeeService.createEmployee(this.formToEmployee()).subscribe({
+    this.employeeService.createEmployee(this.formToEmployee())
+      .pipe(first())
+      .subscribe({
       next: (project: any) => {
         this.handledEmployee.emit(project);
 

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CreateEmployeeDialog} from "./handle-employee/create-employee-dialog/create-employee-dialog.component";
 import {LoggerService} from "../logger/logger.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-employee-list',
@@ -20,7 +21,9 @@ export class EmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employeeService.getEmployees().subscribe({
+    this.employeeService.getEmployees()
+      .pipe(first())
+      .subscribe({
       next: (employees: EmployeeInterface[]) => {
         this.employees = employees;
       },
@@ -29,7 +32,9 @@ export class EmployeesComponent implements OnInit {
       }
     });
 
-    this.activatedRoute.data.subscribe((data: any) => {
+    this.activatedRoute.data
+      .pipe(first())
+      .subscribe((data: any) => {
       this.redirectUrl = data.employeeUrl;
     });
   }

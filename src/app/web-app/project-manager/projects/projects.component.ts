@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../../../network/services/project.service";
 import {Project, ProjectInterface} from "../../../network/models/project";
 import {LoggerService} from "../../../shared/logger/logger.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-projects',
@@ -16,7 +17,9 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe({
+    this.projectService.getProjects()
+      .pipe(first())
+      .subscribe({
       next: (projects: ProjectInterface[]) => {
         this.projects = projects.map((project: ProjectInterface) => Project.fromJSON(project));
       },

@@ -1,25 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Project, ProjectInterface} from "../../../network/models/project";
 import {ProjectService} from "../../../network/services/project.service";
 import {CreateProjectDialogComponent} from "./handle-project/create-project-dialog/create-project-dialog.component";
 import {EditProjectDialogComponent} from "./handle-project/edit-project-dialog/edit-project-dialog.component";
 import {LoggerService} from "../../../shared/logger/logger.service";
+import {first, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['name', 'project_manager', 'employees', 'edit', 'delete'];
   public projects: ProjectInterface[] = [];
+
+  private handledProjectSub?: Subscription;
+  private handledErrorSub?: Subscription;
 
   constructor(private projectService: ProjectService, private dialog: MatDialog, private logger: LoggerService) {
   }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe({
+    this.projectService.getProjects()
+      .pipe(first())
+      .subscribe({
       next: (projects: ProjectInterface[]) => {
         this.projects = projects;
       },
@@ -32,11 +38,11 @@ export class ProjectsComponent implements OnInit {
   openCreateDialog() {
     let dialog: MatDialogRef<CreateProjectDialogComponent> = this.dialog.open(CreateProjectDialogComponent, {width: '600px',});
 
-    dialog.componentInstance.handledProject.subscribe((project: ProjectInterface) => {
+    this.handledProjectSub = dialog.componentInstance.handledProject.subscribe((project: ProjectInterface) => {
       this.projects = [...this.projects, project];
     });
 
-    dialog.componentInstance.error.subscribe((error: any) => {
+    this.handledErrorSub = dialog.componentInstance.error.subscribe((error: any) => {
       this.logger.log(error, "Errore generico", false);
     });
   }
@@ -59,7 +65,9 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: ProjectInterface) {
-    this.projectService.deleteProject(project.id).subscribe({
+    this.projectService.deleteProject(project.id)
+      .pipe(first())
+      .subscribe({
       next: () => {
         this.projects = this.projects.filter((p: ProjectInterface) => p.id !== project.id);
       },
@@ -67,5 +75,10 @@ export class ProjectsComponent implements OnInit {
         this.logger.log(error, error.status);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.handledProjectSub?.unsubscribe();
+    this.handledErrorSub?.unsubscribe();
   }
 }

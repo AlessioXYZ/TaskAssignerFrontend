@@ -6,6 +6,7 @@ import {EmployeeService} from "../../../network/services/employee-service.servic
 import {EmployeeInterface} from "../../../network/models/employee";
 import {Role} from "../../../network/models/role";
 import {RoleService} from "../../../network/services/role.service";
+import {first} from "rxjs";
 
 export const componentDecoratorPreset = {
   templateUrl: './employee-dialog.component.html',
@@ -37,7 +38,9 @@ export abstract class EmployeeDialogComponent implements OnInit {
   }
 
   protected setRoles() {
-    this.roleService.getRoles().subscribe((roles: Role[]) => {
+    this.roleService.getRoles()
+      .pipe(first())
+      .subscribe((roles: Role[]) => {
       this.roles = roles;
     });
   }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectService} from "../../../network/services/project.service";
 import {ProjectInterface} from "../../../network/models/project";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-project',
@@ -19,10 +20,14 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params
+      .pipe(first())
+      .subscribe(params => {
       let projectId = params['id'];
 
-      this.projectService.getProject(projectId).subscribe({
+      this.projectService.getProject(projectId)
+        .pipe(first())
+        .subscribe({
         next: project => {
           this.project = project;
         },

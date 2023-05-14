@@ -6,6 +6,7 @@ import {UserFactoryService} from "../../../network/services/user-factory.service
 import {UserInterface} from "../../../network/models/user";
 import {SetFormControlBackendErrorsService} from "../../../shared/set-form-control-backend-errors/set-form-control-backend-errors.service";
 import {LoggerService} from "../../../shared/logger/logger.service";
+import {first} from "rxjs";
 
 
 @Injectable()
@@ -49,7 +50,9 @@ export class ChangePasswordForm {
 
   changePassword() {
     if (this.form.valid) {
-      this.userService.changePassword(this.oldPassword?.value, this.newPassword?.value).subscribe({
+      this.userService.changePassword(this.oldPassword?.value, this.newPassword?.value)
+        .pipe(first())
+        .subscribe({
         next: (user: UserInterface) => {
           localStorage.setItem('user', JSON.stringify(user));
 

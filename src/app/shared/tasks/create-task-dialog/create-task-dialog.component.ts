@@ -11,6 +11,7 @@ import {SetFormControlBackendErrorsService} from "../../set-form-control-backend
 import {EmployeeService} from "../../../network/services/employee-service.service";
 import {Employee} from "../../../network/models/employee";
 import {LoggerService} from "../../logger/logger.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -36,7 +37,9 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   fetchProjects() {
-    this.projectService.getProjects().subscribe({
+    this.projectService.getProjects()
+      .pipe(first())
+      .subscribe({
       next: (projects) => {
         this.projects = projects;
       },
@@ -47,7 +50,9 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   fetchEmployees() {
-    this.employeeService.getEmployees().subscribe({
+    this.employeeService.getEmployees()
+      .pipe(first())
+      .subscribe({
       next: (employees) => {
         this.employees = Employee.fromJsonList(employees);
       },
@@ -66,7 +71,9 @@ export class CreateTaskDialogComponent implements OnInit {
     if (this.createTaskForm.form.valid) {
       let task: TaskInterface = this.createTaskForm.form.value;
 
-      this.taskService.createTask(task).subscribe({
+      this.taskService.createTask(task)
+        .pipe(first())
+        .subscribe({
         next: (task) => {
           this.savedTask.emit(task);
 

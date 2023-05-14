@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, first} from 'rxjs';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import firebase from "firebase/compat";
 import MessagePayload = firebase.messaging.MessagePayload;
@@ -10,7 +10,9 @@ export class MessagingService {
   currentMessage = new BehaviorSubject<MessagePayload | null>(null);
 
   constructor(private angularFireMessaging: AngularFireMessaging, private employeeService: EmployeeService) {
-    this.angularFireMessaging.messages.subscribe(
+    this.angularFireMessaging.messages
+      .pipe(first())
+      .subscribe(
       (payload) => {
         this.currentMessage.next(payload);
       }
