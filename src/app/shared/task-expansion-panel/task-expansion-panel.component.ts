@@ -70,7 +70,7 @@ export class TaskExpansionPanelComponent implements OnInit {
           this.task = new Task(task);
         },
         error: (error: any) => {
-          // TODO: Understand why it does not emit the value, if put outside it emits it
+          // TODO: Understand why it does not emit the value, if put outside the subscribe it emits it
           this.onTaskError.emit(['Errore durante la riapertura della task', this.task]);
         }
       });
