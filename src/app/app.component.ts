@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {MessagingService} from "./network/firebase/messaging.service";
 
 
 @Component({
@@ -8,4 +9,11 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'TaskMaster';
+
+  constructor(private messagingService: MessagingService) {
+  }
+
+  ngOnInit() {
+    this.messagingService.requestPermission();
+  }
 }
