@@ -37,27 +37,27 @@ export class LoginForm {
       this._userService.login(this.username?.value, this.password?.value)
         .pipe(first())
         .subscribe({
-        next: (user: UserInterface) => {
-          localStorage.setItem('token', user.auth_token ?? "");
-          localStorage.setItem('user', JSON.stringify(user));
+          next: (user: UserInterface) => {
+            localStorage.setItem('token', user.auth_token ?? "");
+            localStorage.setItem('user', JSON.stringify(user));
 
 
-          let userType = <UserTypes>user.type;
-          let userObj = this.userFactoryService.getUserByType(userType);
+            let userType = <UserTypes>user.type;
+            let userObj = this.userFactoryService.getUserByType(userType);
 
 
-          if (!user.has_changed_password) {
-            this._router.navigate(['web-app/change-password']).then(r => r);
-          } else {
-            userObj?.redirect();
+            if (!user.has_changed_password) {
+              this._router.navigate(['web-app/change-password']).then(r => r);
+            } else {
+              userObj?.redirect();
+            }
+          },
+          error: (error) => {
+            this.logger.log(error.error, error.status);
+
+            SetFormControlBackendErrorsService.setBackendErrors(this.form, error.error);
           }
-        },
-        error: (error) => {
-          this.logger.log(error.error, error.status);
-
-          SetFormControlBackendErrorsService.setBackendErrors(this.form, error.error);
-        }
-      });
+        });
     } else {
       this.form.markAllAsTouched();
     }
