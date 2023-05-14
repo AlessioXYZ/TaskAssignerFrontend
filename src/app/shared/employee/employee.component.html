@@ -27,11 +27,17 @@
 <div class="row mt-4">
   <div class="col-md">
     <h2>Task Attivi ({{employee?.tasks?.pending?.length}})</h2>
-    <app-task-expansion-panel *ngFor="let task of employee?.tasks?.pending" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+    <app-task-expansion-panel
+      *ngFor="let task of employee?.tasks?.pending" [task]="task"
+      (onTaskModify)="onTaskModify($event)" (onTaskError)="onTaskError($event)">
+    </app-task-expansion-panel>
   </div>
   <div class="col-md">
     <h2>Task completati di recente ({{employee?.tasks?.recentCompleted?.length}})</h2>
-    <app-task-expansion-panel *ngFor="let task of employee?.tasks?.recentCompleted" [task]="task" (onTaskModify)="onTaskModify($event)"></app-task-expansion-panel>
+    <app-task-expansion-panel
+      *ngFor="let task of employee?.tasks?.recentCompleted" [task]="task"
+      (onTaskModify)="onTaskModify($event)" (onTaskError)="onTaskError($event)">
+    </app-task-expansion-panel>
   </div>
 </div>
 

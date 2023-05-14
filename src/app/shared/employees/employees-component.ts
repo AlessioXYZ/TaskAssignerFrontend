@@ -24,19 +24,19 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.getEmployees()
       .pipe(first())
       .subscribe({
-      next: (employees: EmployeeInterface[]) => {
-        this.employees = employees;
-      },
-      error: (err) => {
-        this.logger.log(err, err.status)
-      }
-    });
+        next: (employees: EmployeeInterface[]) => {
+          this.employees = employees;
+        },
+        error: (err) => {
+          this.logger.log(err, err.status)
+        }
+      });
 
     this.activatedRoute.data
       .pipe(first())
       .subscribe((data: any) => {
-      this.redirectUrl = data.employeeUrl;
-    });
+        this.redirectUrl = data.employeeUrl;
+      });
   }
 
   scoreToColor(score: number): string {
@@ -52,11 +52,14 @@ export class EmployeesComponent implements OnInit {
   addEmployee() {
     let dialog: MatDialogRef<CreateEmployeeDialog> = this.dialog.open(CreateEmployeeDialog, {width: '600px',});
 
-    dialog.componentInstance.handledEmployee.subscribe((project: EmployeeInterface) => {
-      this.employees = [...this.employees, project];
+    dialog.componentInstance.handledEmployee.subscribe((employee: EmployeeInterface) => {
+      this.employees = [...this.employees, employee];
     });
 
-    dialog.componentInstance.error.subscribe((error: any) => {
+    dialog.componentInstance.error.subscribe(([error, employee]) => {
+      // this is done because if the employee is not created, the server will return an error and if for any reason the employee was already added to the list, it will be removed
+      this.employees = this.employees.filter((e: EmployeeInterface) => e.id !== employee.id);
+
       this.logger.log(error, "Errore generico", false);
     });
   }

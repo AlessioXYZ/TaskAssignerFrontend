@@ -21,7 +21,7 @@ export abstract class EmployeeDialogComponent implements OnInit {
   roles: Role[] = [];
 
   @Output() handledEmployee = new EventEmitter<EmployeeInterface>();
-  @Output() error = new EventEmitter<any>();
+  @Output() error = new EventEmitter<[string, EmployeeInterface]>();
 
   constructor(
     public dialogRef: MatDialogRef<EmployeeDialogComponent>,

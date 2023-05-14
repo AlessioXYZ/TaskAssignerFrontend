@@ -3,6 +3,7 @@ import {componentDecoratorPreset, EmployeeDialogComponent} from "../employee-dia
 import {EmployeeForm} from "../employee-form/employee-form";
 import {SetFormControlBackendErrorsService} from "../../../set-form-control-backend-errors/set-form-control-backend-errors.service";
 import {first} from "rxjs";
+import {EmployeeInterface} from "../../../../network/models/employee";
 
 
 @Component({
@@ -23,20 +24,23 @@ export class CreateEmployeeDialog extends EmployeeDialogComponent {
       return;
     }
 
-    this.employeeService.createEmployee(this.formToEmployee())
+    let employee = this.formToEmployee();
+
+    this.employeeService.createEmployee(employee)
       .pipe(first())
       .subscribe({
-      next: (project: any) => {
-        this.handledEmployee.emit(project);
+        next: (employee: EmployeeInterface) => {
+          // this can't be done before the call (optimistic update) because there is a chance that the call fails (if the user inserts wrong data)
 
-        this.dialogRef.close();
-      },
-      error: (error: any) => {
-        this.error.emit(error);
+          this.handledEmployee.emit(employee)
+          this.dialogRef.close();
+        },
+        error: (error: any) => {
+          this.error.emit([error.error, employee]);
 
 
-        SetFormControlBackendErrorsService.setBackendErrors(this.employeeForm.form, error.error);
-      }
-    })
+          SetFormControlBackendErrorsService.setBackendErrors(this.employeeForm.form, error.error);
+        }
+      })
   }
 }

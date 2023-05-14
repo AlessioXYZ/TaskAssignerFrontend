@@ -29,26 +29,26 @@ export class TasksComponent {
     this.taskService.getTasks()
       .pipe(first())
       .subscribe({
-      next: (tasks) => {
-        this.tasks = new TasksList(tasks);
-      },
-      error: (error) => {
-        this.logger.log(error, error.status);
-      }
-    })
+        next: (tasks) => {
+          this.tasks = TasksList.jsonToTaskList(tasks)
+        },
+        error: (error) => {
+          this.logger.log(error, error.status);
+        }
+      })
   }
 
   private fetchProjects() {
     this.projectService.getProjects()
       .pipe(first())
       .subscribe({
-      next: (projects) => {
-        this.projects = projects;
-      },
-      error: (error) => {
-        this.logger.log(error, error.status);
-      }
-    })
+        next: (projects) => {
+          this.projects = projects;
+        },
+        error: (error) => {
+          this.logger.log(error, error.status);
+        }
+      })
   }
 
   setModuleType() {
@@ -70,6 +70,16 @@ export class TasksComponent {
       }
       return task;
     });
+  }
+
+  onTaskError($event: [string, Task]) {
+    let [error, task] = $event;
+
+    this.logger.log(error);
+
+    if (this.tasks) {
+      this.tasks?.taskFilter((t) => t.id !== task.id);
+    }
   }
 
   openCreateDialog() {

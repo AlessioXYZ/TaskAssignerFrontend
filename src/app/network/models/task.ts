@@ -41,6 +41,16 @@ export class Task implements TaskInterface {
     this.due_date = task.due_date;
   }
 
+  complete() {
+    this.completed = true;
+    this.completed_date = new Date();
+  }
+
+  reopen() {
+    this.completed = false;
+    this.completed_date = undefined;
+  }
+
   static jsonToTaskList(tasks: TaskInterface[]): Task[] {
     return tasks.map((task) => {
       return new Task(task);
@@ -101,5 +111,4 @@ export class TasksList extends Array<Task> {
       return new Task(task);
     }));
   }
-
 }

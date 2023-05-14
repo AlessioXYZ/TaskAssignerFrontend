@@ -6,6 +6,7 @@ import {Task, TasksList} from "../../network/models/task";
 import {ProjectService} from "../../network/services/project.service";
 import {combineLatest, EMPTY, first, forkJoin, Observable, Subject, takeUntil} from "rxjs";
 import {Project} from "../../network/models/project";
+import {LoggerService} from "../logger/logger.service";
 
 @Component({
   selector: 'app-employee',
@@ -17,7 +18,10 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   public fromUrl!: string;
   private destroy$ = new Subject<void>();
 
-  constructor(private employeeService: EmployeeService, private projectService: ProjectService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private employeeService: EmployeeService, private projectService: ProjectService,
+    private activatedRoute: ActivatedRoute, private router: Router, private logger: LoggerService
+  ) {
   }
 
   private loadData() {
@@ -40,19 +44,19 @@ export class EmployeeComponent implements OnInit, OnDestroy {
           forkJoin(joinSources)
             .pipe(first())
             .subscribe({
-            next: ([employee, project]) => {
-              if (project) {
-                let projectObj = Project.fromJSON(project);
-                employee.tasks = projectObj.getEmployeeTasks(employee);
-              }
+              next: ([employee, project]) => {
+                if (project) {
+                  let projectObj = Project.fromJSON(project);
+                  employee.tasks = projectObj.getEmployeeTasks(employee);
+                }
 
-              this.employee = new Employee(employee);
-            },
-            error: (err) => {
-              console.error(err);
-              this.router.navigateByUrl(this.fromUrl);
-            }
-          })
+                this.employee = new Employee(employee);
+              },
+              error: (err) => {
+                console.error(err);
+                this.router.navigateByUrl(this.fromUrl);
+              }
+            })
         },
         error: (err) => {
           console.error(err);
@@ -79,5 +83,13 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         return task;
       });
     }
+  }
+
+  onTaskError($event: [string, Task]) {
+    let [error, task] = $event;
+
+    this.logger.log(error);
+    console.log(task);
+    this.onTaskModify(task);
   }
 }

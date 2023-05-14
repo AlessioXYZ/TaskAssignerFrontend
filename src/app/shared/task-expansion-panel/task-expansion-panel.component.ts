@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../../network/models/task';
+import {Task, TaskInterface} from '../../network/models/task';
 import {TaskService} from "../../network/services/task.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
@@ -15,6 +15,7 @@ import {first} from "rxjs";
 export class TaskExpansionPanelComponent implements OnInit {
   @Input() task!: Task;
   @Output() onTaskModify = new EventEmitter<Task>();
+  @Output() onTaskError = new EventEmitter<[string, Task]>();
 
   moduleType: string = '';
 
@@ -34,32 +35,45 @@ export class TaskExpansionPanelComponent implements OnInit {
     this.setModuleType();
   }
 
+  private handleError(error: any) {
+    this.onTaskError.emit([error.error, this.task]);
+  }
+
   complete() {
+    let taskCopy = new Task(this.task);
+    taskCopy.complete();
+    this.onTaskModify.emit(taskCopy);
+
+
     this.taskService.complete(this.task)
       .pipe(first())
       .subscribe({
-      next: (task: Task) => {
-        this.onTaskModify.emit(task);
-        this.task = task;
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
+        next: (task: TaskInterface) => {
+          this.task = new Task(task);
+        },
+        error: (error: any) => {
+          this.handleError(error);
+        }
+      });
   }
 
   reopen() {
+    let taskCopy = new Task(this.task);
+
+    taskCopy.reopen();
+    this.onTaskModify.emit(taskCopy);
+
     this.taskService.reopen(this.task)
       .pipe(first())
       .subscribe({
-      next: (task: Task) => {
-        this.onTaskModify.emit(task);
-        this.task = task;
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
+        next: (task: TaskInterface) => {
+          this.task = new Task(task);
+        },
+        error: (error: any) => {
+          // TODO: Understand why it does not emit the value, if put outside it emits it
+          this.onTaskError.emit(['Errore durante la riapertura della task', this.task]);
+        }
+      });
   }
 
   openTimeReportDialog() {
